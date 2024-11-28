@@ -5,17 +5,13 @@
 StateMachine::StateMachine(std::unordered_map<std::string, std::function<std::unique_ptr<BaseState>()>> states)
     : states(states), current(std::make_unique<EmptyState>()) {}
 
-StateMachine::~StateMachine()
-{
-    current.reset(nullptr);
-    states.clear();
-}
+StateMachine::~StateMachine() {}
 
 void StateMachine::change(std::string stateName, void *enterParams)
 {
     assert(states.find(stateName) != states.end());
     current->exit();
-    current.reset(states[stateName]().release());
+    current = states[stateName]();
     current->enter(enterParams);
 }
 
