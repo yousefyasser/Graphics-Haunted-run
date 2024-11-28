@@ -168,6 +168,13 @@ void myKeyboard(unsigned char button, int x, int y)
 	glutPostRedisplay();
 }
 
+void myUpdate(int value)
+{
+	game.update();
+	glutPostRedisplay();
+	glutTimerFunc(1000 / game.FPS, myUpdate, 0);
+}
+
 //=======================================================================
 // Assets Loading Function
 //=======================================================================
@@ -211,6 +218,8 @@ void main(int argc, char** argv)
 	glEnable(GL_COLOR_MATERIAL);
 
 	glShadeModel(GL_SMOOTH);
+
+	glutTimerFunc(0, myUpdate, 0);
 
 	glutMainLoop();
 }

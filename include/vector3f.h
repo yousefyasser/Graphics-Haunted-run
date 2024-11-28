@@ -5,6 +5,7 @@ public:
     float x, y, z;
 
     Vector3f(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f);
+    ~Vector3f();
     Vector3f operator+(const Vector3f &v) const;
     Vector3f operator+=(const Vector3f &v);
     Vector3f operator-(const Vector3f &v) const;

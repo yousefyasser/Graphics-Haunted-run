@@ -12,12 +12,12 @@ class StateMachine
 {
 public:
     StateMachine(std::unordered_map<std::string, std::function<std::unique_ptr<BaseState>()>> states);
-    void change(std::string stateName, void* enterParams);
+    ~StateMachine();
+    void change(std::string stateName, void *enterParams);
     void update(float dt);
-    void render();
+    void render() const;
 
 private:
-    std::unique_ptr<EmptyState> empty;
-    std::unordered_map<std::string, std::function<std::unique_ptr<BaseState>()>> states;
     std::unique_ptr<BaseState> current;
+    std::unordered_map<std::string, std::function<std::unique_ptr<BaseState>()>> states;
 };
