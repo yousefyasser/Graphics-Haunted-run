@@ -5,19 +5,46 @@
 
 void util::setupLights()
 {
-    GLfloat ambient[] = {0.5f, 0.5f, 0.5f, 1.0f};
-    GLfloat diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat shininess[] = {50};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-    glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+	// Enable Lighting for this OpenGL Program
+	glEnable(GL_LIGHTING);
 
-    GLfloat lightIntensity[] = {1.0f, 1.0f, 1, 1.0f};
-    GLfloat lightPosition[] = {-5.0f, 2.0f, -3.0f, 0.0f};
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity);
+	// Enable Light Source number 0
+	// OpengL has 8 light sources
+	glEnable(GL_LIGHT0);
+
+	// Define Light source 0 ambient light
+	GLfloat ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+
+	// Define Light source 0 diffuse light
+	GLfloat diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+
+	// Define Light source 0 Specular light
+	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+
+	// Finally, define light source 0 position in World Space
+	GLfloat light_position[] = { 0.0f, 10.0f, 0.0f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+}
+
+void util::setupMaterials()
+{
+	// Enable Material Tracking
+	glEnable(GL_COLOR_MATERIAL);
+
+	// Sich will be assigneet Material Properties whd by glColor
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+	// Set Material's Specular Color
+	// Will be applied to all objects
+	GLfloat specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+
+	// Set Material's Shine value (0->128)
+	GLfloat shininess[] = { 96.0f };
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 }
 
 void util::setupCamera(int width, int height, Camera &camera)
@@ -49,10 +76,12 @@ void util::drawText(float x, float y, const char *text)
     }
 }
 
-void util::drawText(float x, float y, float z, std::string text) {
+void util::drawText(float x, float y, float z, std::string text)
+{
     util::drawText(x, y, z, text.c_str());
 }
 
-void util::drawText(float x, float y, std::string text) {
+void util::drawText(float x, float y, std::string text)
+{
     util::drawText(x, y, text.c_str());
 }

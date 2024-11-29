@@ -8,6 +8,7 @@
 namespace util
 {
     void setupLights();
+    void setupMaterials();
     void setupCamera(int width, int height, Camera &camera);
     void drawText(float x, float y, float z, const char *text);
     void drawText(float x, float y, const char *text);
