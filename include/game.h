@@ -17,7 +17,6 @@ public:
     Camera camera;
 
     Game();
-    ~Game();
     void update();
     void render() const;
 };

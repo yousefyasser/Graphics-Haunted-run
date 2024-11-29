@@ -12,8 +12,6 @@ Game::Game()
   stateMachine.change("TestState", nullptr);
 }
 
-Game::~Game() {}
-
 void Game::update()
 {
   static auto lastTime = std::chrono::high_resolution_clock::now();

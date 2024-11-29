@@ -12,7 +12,6 @@ class StateMachine
 {
 public:
     StateMachine(std::unordered_map<std::string, std::function<std::unique_ptr<BaseState>()>> states);
-    ~StateMachine();
     void change(std::string stateName, void *enterParams);
     void update(float dt);
     void render() const;

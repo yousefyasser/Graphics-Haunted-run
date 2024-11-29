@@ -6,7 +6,6 @@ class EmptyState: public BaseState
 {
 public:
     EmptyState();
-    virtual ~EmptyState();
     virtual void render() const override;
     virtual void update(float dt) override;
     virtual void enter(void* params) override;
