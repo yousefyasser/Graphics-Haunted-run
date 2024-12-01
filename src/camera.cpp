@@ -6,6 +6,16 @@
 
 Camera::Camera(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) : eye(eyeX, eyeY, eyeZ), center(centerX, centerY, centerZ), up(upX, upY, upZ) {}
 
+void Camera::setup(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(fovy, aspectRatio, zNear, zFar);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    look();
+}
+
 void Camera::moveX(float d)
 {
     Vector3f right = up.cross(center - eye).unit();
