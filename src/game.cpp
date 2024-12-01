@@ -12,7 +12,7 @@ Game::Game()
   stateMachine.change("TestState", nullptr);
 }
 
-void Game::update()
+void Game::update(GLdouble aspectRatio)
 {
   static auto lastTime = std::chrono::high_resolution_clock::now();
   auto currentTime = std::chrono::high_resolution_clock::now();
@@ -21,6 +21,7 @@ void Game::update()
   lastTime = currentTime;
 
   stateMachine.update(dt);
+  camera.setup(FOVY, aspectRatio, ZNEAR, ZFAR);
 }
 
 void Game::render() const

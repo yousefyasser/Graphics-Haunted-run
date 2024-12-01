@@ -17,6 +17,6 @@ public:
     Camera camera;
 
     Game();
-    void update();
+    void Game::update(GLdouble aspectRatio);
     void render() const;
 };

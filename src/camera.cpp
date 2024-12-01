@@ -6,6 +6,16 @@
 
 Camera::Camera(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) : eye(eyeX, eyeY, eyeZ), center(centerX, centerY, centerZ), up(upX, upY, upZ) {}
 
+void Camera::setup(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(fovy, aspectRatio, zNear, zFar);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    look();
+}
+
 void Camera::moveX(float d)
 {
     Vector3f right = up.cross(center - eye).unit();
@@ -51,6 +61,21 @@ void Camera::rotateZ(float a)
     float sinA = sin(DEG2RAD(a));
     up = up * cosA + view.cross(up) * sinA + view * (view.dot(up) * (1 - cosA));
     center = eye + view;
+}
+
+void Camera::setFirstPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection) {
+    eye = characterPosition;
+    center = characterPosition + characterDirection;
+    up = Vector3f(0, 1, 0);
+    look();
+}
+
+void Camera::setThirdPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection, float distance, float height) {
+    Vector3f behind = characterDirection.unit() * -distance;
+    eye = characterPosition + behind + Vector3f(0, height, 0);
+    center = characterPosition;
+    up = Vector3f(0, 1, 0);
+    look();
 }
 
 void Camera::look()
