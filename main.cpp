@@ -162,10 +162,12 @@ void myKeyboard(unsigned char button, int x, int y)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	case '1':
-		game.camera.moveX(1);
+		// TODO: add first person view when player is implemented
+		// game.camera.setFirstPersonView(characterPosition, characterDirection);
 		break;
 	case '3':
-		game.camera.moveZ(1);
+		// TODO: add third person view when player is implemented
+		// game.camera.setFirstPersonView(characterPosition, characterDirection, 10.0f, 5.0f);
 		break;
 	case 27:
 		exit(0);
@@ -179,7 +181,7 @@ void myKeyboard(unsigned char button, int x, int y)
 
 void myUpdate(int value)
 {
-	game.update(fovy, aspectRatio, zNear, zFar);
+	game.update(aspectRatio);
 	glutPostRedisplay();
 	glutTimerFunc(1000 / game.FPS, myUpdate, 0);
 }

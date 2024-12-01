@@ -18,5 +18,7 @@ public:
     void rotateX(float a);
     void rotateY(float a);
     void rotateZ(float a);
+    void Camera::setFirstPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection);
+    void Camera::setThirdPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection, float distance, float height);
     void look();
 };

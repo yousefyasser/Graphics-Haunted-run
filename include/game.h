@@ -17,6 +17,6 @@ public:
     Camera camera;
 
     Game();
-    void Game::update(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar);
+    void Game::update(GLdouble aspectRatio);
     void render() const;
 };

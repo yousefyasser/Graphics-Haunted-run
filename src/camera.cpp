@@ -63,6 +63,21 @@ void Camera::rotateZ(float a)
     center = eye + view;
 }
 
+void Camera::setFirstPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection) {
+    eye = characterPosition;
+    center = characterPosition + characterDirection;
+    up = Vector3f(0, 1, 0);
+    look();
+}
+
+void Camera::setThirdPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection, float distance, float height) {
+    Vector3f behind = characterDirection.unit() * -distance;
+    eye = characterPosition + behind + Vector3f(0, height, 0);
+    center = characterPosition;
+    up = Vector3f(0, 1, 0);
+    look();
+}
+
 void Camera::look()
 {
     gluLookAt(
