@@ -13,7 +13,7 @@ char title[] = "3D Model Loader Sample";
 
 // 3D Projection Options
 GLdouble fovy = game.FOVY;
-GLdouble aspectRatio = (GLdouble)game.WINDOW_WIDTH / (GLdouble)game.WINDOW_HEIGHT;
+GLdouble aspectRatio = game.ASPECT_RATIO;
 GLdouble zNear = game.ZNEAR;
 GLdouble zFar = game.ZFAR;
 
@@ -181,7 +181,7 @@ void myKeyboard(unsigned char button, int x, int y)
 
 void myUpdate(int value)
 {
-	game.update(aspectRatio);
+	game.update();
 	glutPostRedisplay();
 	glutTimerFunc(1000 / game.FPS, myUpdate, 0);
 }
