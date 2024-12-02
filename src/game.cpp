@@ -5,7 +5,7 @@
 Game::Game()
     : WINDOW_WIDTH(1280), WINDOW_HEIGHT(720), FPS(60),
       FOVY(45.0), ZNEAR(0.1), ZFAR(1000), ASPECT_RATIO((GLdouble)WINDOW_WIDTH / (GLdouble)WINDOW_HEIGHT),
-      dt(0.0f), camera(20, 5, 20, 0, 0, 0, 0, 1, 0),
+      dt(0.0f), camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f), sun(GL_LIGHT1),
       stateMachine({{"TestState", []()
                      { return std::make_unique<EmptyState>(); }}})
 {
@@ -20,11 +20,13 @@ void Game::update()
   lastTime = currentTime;
   dt = elapsed.count();
 
-  stateMachine.update(dt);
   camera.setup(FOVY, ASPECT_RATIO, ZNEAR, ZFAR);
+  sun.update();
+  stateMachine.update(dt);
 }
 
 void Game::render() const
 {
+  sun.render();
   stateMachine.render();
 }
