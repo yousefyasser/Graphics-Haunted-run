@@ -1,8 +1,12 @@
 #pragma once
 
+#include <chrono>
+
 #include "camera.h"
 #include "statemachine.h"
 #include "sun.h"
+
+using std::chrono::steady_clock;
 
 class Game
 {
@@ -15,11 +19,16 @@ public:
     const GLdouble ZFAR;
     const GLdouble ASPECT_RATIO;
 
-    float dt;
+public:
     StateMachine stateMachine;
     Camera camera;
     Sun sun;
 
+private:
+    float dt;
+    steady_clock::time_point lastTime;
+
+public:
     Game();
     void update();
     void render() const;

@@ -10,18 +10,18 @@ Game::Game()
                      { return std::make_unique<EmptyState>(); }}})
 {
   stateMachine.change(StateType::Empty, nullptr);
+  lastTime = std::chrono::high_resolution_clock::now();
 }
 
 void Game::update()
 {
-  static auto lastTime = std::chrono::high_resolution_clock::now();
   auto currentTime = std::chrono::high_resolution_clock::now();
   std::chrono::duration<float> elapsed = currentTime - lastTime;
   lastTime = currentTime;
   dt = elapsed.count();
 
   camera.setup(FOVY, ASPECT_RATIO, ZNEAR, ZFAR);
-  sun.update();
+  sun.update(dt);
   stateMachine.update(dt);
 }
 
