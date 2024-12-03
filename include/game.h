@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "statemachine.h"
 #include "sun.h"
+#include "player.h"
 
 using std::chrono::steady_clock;
 
@@ -23,6 +24,7 @@ public:
     StateMachine stateMachine;
     Camera camera;
     Sun sun;
+    Player player;
 
 private:
     float dt;
