@@ -3,7 +3,6 @@
 #include "vector3f.h"
 #include "stdlib.h"
 #include <glut.h>
-#define DEG2RAD(a) (a * 0.0174532925)
 
 class Camera {
 public:

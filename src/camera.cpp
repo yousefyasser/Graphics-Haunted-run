@@ -1,18 +1,20 @@
-#include "include/vector3f.h"
-#include "include/camera.h"
-
 #include <cmath>
 #include <glut.h>
 
+#include "include/vector3f.h"
+#include "include/camera.h"
+#include "include/util.h"
+
 Camera::Camera(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) : eye(eyeX, eyeY, eyeZ), center(centerX, centerY, centerZ), up(upX, upY, upZ) {}
 
-void Camera::setup(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar) {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(fovy, aspectRatio, zNear, zFar);
+void Camera::setup(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar)
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(fovy, aspectRatio, zNear, zFar);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     look();
 }
 
@@ -40,7 +42,7 @@ void Camera::rotateX(float a)
 {
     Vector3f view = (center - eye).unit();
     Vector3f right = up.cross(view).unit();
-    view = view * cos(DEG2RAD(a)) + up * sin(DEG2RAD(a));
+    view = view * cos(util::DEG2RAD(a)) + up * sin(util::DEG2RAD(a));
     up = view.cross(right);
     center = eye + view;
 }
@@ -49,7 +51,7 @@ void Camera::rotateY(float a)
 {
     Vector3f view = (center - eye).unit();
     Vector3f right = up.cross(view).unit();
-    view = view * cos(DEG2RAD(a)) + right * sin(DEG2RAD(a));
+    view = view * cos(util::DEG2RAD(a)) + right * sin(util::DEG2RAD(a));
     right = view.cross(up);
     center = eye + view;
 }
@@ -57,20 +59,22 @@ void Camera::rotateY(float a)
 void Camera::rotateZ(float a)
 {
     Vector3f view = (center - eye).unit();
-    float cosA = cos(DEG2RAD(a));
-    float sinA = sin(DEG2RAD(a));
+    float cosA = cos(util::DEG2RAD(a));
+    float sinA = sin(util::DEG2RAD(a));
     up = up * cosA + view.cross(up) * sinA + view * (view.dot(up) * (1 - cosA));
     center = eye + view;
 }
 
-void Camera::setFirstPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection) {
+void Camera::setFirstPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection)
+{
     eye = characterPosition;
     center = characterPosition + characterDirection;
     up = Vector3f(0, 1, 0);
     look();
 }
 
-void Camera::setThirdPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection, float distance, float height) {
+void Camera::setThirdPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection, float distance, float height)
+{
     Vector3f behind = characterDirection.unit() * -distance;
     eye = characterPosition + behind + Vector3f(0, height, 0);
     center = characterPosition;

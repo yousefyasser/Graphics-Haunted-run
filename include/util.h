@@ -7,6 +7,8 @@
 
 namespace util
 {
+    float DEG2RAD(float a);
+
     void setupLights();
     void setupMaterials();
     void setupCamera(int width, int height, Camera &camera);

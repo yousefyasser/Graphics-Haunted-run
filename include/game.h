@@ -2,6 +2,7 @@
 
 #include "camera.h"
 #include "statemachine.h"
+#include "sun.h"
 
 class Game
 {
@@ -13,9 +14,11 @@ public:
     const GLdouble ZNEAR;
     const GLdouble ZFAR;
     const GLdouble ASPECT_RATIO;
+
     float dt;
     StateMachine stateMachine;
     Camera camera;
+    Sun sun;
 
     Game();
     void update();

@@ -41,12 +41,9 @@ void myInit(void)
 	// UP (ux, uy, uz):  denotes the upward orientation of the camera.							 //
 	//*******************************************************************************************//
 
-	util::setupLights();
+	// util::setupLights();
+	game.sun.setup();
 	util::setupMaterials();
-
-	glEnable(GL_DEPTH_TEST);
-
-	glEnable(GL_NORMALIZE);
 }
 
 //=======================================================================
@@ -88,62 +85,44 @@ void myDisplay(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLfloat lightIntensity[] = {0.7, 0.7, 0.7, 1.0f};
-	GLfloat lightPosition[] = {0.0f, 100.0f, 0.0f, 0.0f};
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
-
 	// Draw Ground
-	RenderGround();
+	// RenderGround();
 
 	// Draw Tree Model
-	glPushMatrix();
-	glTranslatef(10, 0, 0);
-	glScalef(0.7, 0.7, 0.7);
-	model_tree.Draw();
-	glPopMatrix();
+	// glPushMatrix();
+	// glTranslatef(10, 0, 0);
+	// glScalef(0.7, 0.7, 0.7);
+	// model_tree.Draw();
+	// glPopMatrix();
 
 	// Draw house Model
-	glPushMatrix();
-	glRotatef(90.f, 1, 0, 0);
-	model_house.Draw();
-	glPopMatrix();
+	// glPushMatrix();
+	// glRotatef(90.f, 1, 0, 0);
+	// model_house.Draw();
+	// glPopMatrix();
 
 	// Draw key model
-	glPushMatrix();
-	glTranslatef(0.0f, 2.0f, 10.0f);
-	glScalef(0.1f, 0.1f, 0.1f);
-	model_key.Draw();
-	glPopMatrix();
+	// glPushMatrix();
+	// glTranslatef(0.0f, 2.0f, 10.0f);
+	// glScalef(0.1f, 0.1f, 0.1f);
+	// model_key.Draw();
+	// glPopMatrix();
 
 	// Draw player model
 	glPushMatrix();
-	glTranslatef(15.0f, 2.0f, 0.0f);
 	glScalef(0.01f, 0.01f, 0.01f);
+	glRotatef(180, 0, 1, 0);
 	model_player.Draw();
 	glPopMatrix();
 
 	// Draw enemy model
-	glPushMatrix();
-	glTranslatef(0.0f, 1.0f, 15.0f);
-	glScalef(5.0f, 5.0f, 5.0f);
-	model_enemy.Draw();
-	glPopMatrix();
+	// glPushMatrix();
+	// glTranslatef(0.0f, 1.0f, 15.0f);
+	// glScalef(5.0f, 5.0f, 5.0f);
+	// model_enemy.Draw();
+	// glPopMatrix();
 
-	// sky box
-	glPushMatrix();
-
-	GLUquadricObj *qobj;
-	qobj = gluNewQuadric();
-	glTranslated(50, 0, 0);
-	glRotated(90, 1, 0, 1);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	gluQuadricTexture(qobj, true);
-	gluQuadricNormals(qobj, GL_SMOOTH);
-	gluSphere(qobj, 100, 100, 100);
-	gluDeleteQuadric(qobj);
-
-	glPopMatrix();
+	game.render();
 
 	glutSwapBuffers();
 }
@@ -156,11 +135,43 @@ void myKeyboard(unsigned char button, int x, int y)
 	switch (button)
 	{
 	case 'w':
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		game.camera.moveY(1.0f);
 		break;
-	case 'r':
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	case 's':
+		game.camera.moveY(-1.0f);
 		break;
+	case 'd':
+		game.camera.moveX(-1.0f);
+		break;
+	case 'a':
+		game.camera.moveX(1.0f);
+		break;
+	case 'q':
+		game.camera.moveZ(1.0f);
+		break;
+	case 'e':
+		game.camera.moveZ(-1.0f);
+		break;
+
+	case 'i':
+		game.camera.rotateX(1.0f);
+		break;
+	case 'k':
+		game.camera.rotateX(-1.0f);
+		break;
+	case 'l':
+		game.camera.rotateY(-1.0f);
+		break;
+	case 'j':
+		game.camera.rotateY(1.0f);
+		break;
+	case 'u':
+		game.camera.rotateZ(1.0f);
+		break;
+	case 'o':
+		game.camera.rotateZ(-1.0f);
+		break;
+
 	case '1':
 		// TODO: add first person view when player is implemented
 		// game.camera.setFirstPersonView(characterPosition, characterDirection);
@@ -227,7 +238,6 @@ void main(int argc, char **argv)
 	LoadAssets();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_COLOR_MATERIAL);
 
