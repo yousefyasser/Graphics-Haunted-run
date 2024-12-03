@@ -3,6 +3,7 @@
 #include "camera.h"
 #include "statemachine.h"
 #include "sun.h"
+#include "player.h"
 
 class Game
 {
@@ -19,6 +20,7 @@ public:
     StateMachine stateMachine;
     Camera camera;
     Sun sun;
+    Player player;
 
     Game();
     void update();

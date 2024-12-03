@@ -1,41 +1,30 @@
-#include "include/vector3f.h"
-#include "include/boundingbox.h"
+#include "include/gameobject.h"
 
-class GameObject {
-public:
-  Vector3f position;
-  BoundingBox boundingBox;
+GameObject::GameObject() { this->position = Vector3f(); }
 
-  // Default constructor
-  GameObject() { this->position = Vector3f(); }
+// Constructor with position
+GameObject::GameObject(const Vector3f &initialPosition) {
+  this->position = initialPosition;
+  // boundingBox = calculateBoundingBox(); // I cant call a virtual function
+  // here gotta call it down
+}
 
-  // Constructor with position
-  GameObject(const Vector3f &initialPosition) {
-    this->position = initialPosition;
-    // boundingBox = calculateBoundingBox(); // I cant call a virtual function
-    // here gotta call it down
-  }
+// set position
+void GameObject::setPosition(const Vector3f &newPosition) {
+  this->position = newPosition;
+  boundingBox = calculateBoundingBox();
+}
 
-  // set position
-  void setPosition(const Vector3f &newPosition) {
-    this->position = newPosition;
-    boundingBox = calculateBoundingBox();
-  }
+// get position
+Vector3f GameObject::getPosition() { return position; }
 
-  // get position
-  Vector3f getPosition() { return position; }
+// print GameObject
+void GameObject::print() {
+  printf("Position: (%f, %f, %f)\n", position.x, position.y, position.z);
+  boundingBox.print();
+}
 
-  // print GameObject
-  void print() {
-    printf("Position: (%f, %f, %f)\n", position.x, position.y, position.z);
-    boundingBox.print();
-  }
-
-  // Pure virtual function to calculate bounding box
-  virtual BoundingBox calculateBoundingBox() = 0;
-
-  // Check collision with another object
-  virtual bool checkCollision(const GameObject *other) {
-    return boundingBox.intersects(other->boundingBox);
-  }
-};
+// Check collision with another object
+bool GameObject::checkCollision(const GameObject *other) {
+  return boundingBox.intersects(other->boundingBox);
+}

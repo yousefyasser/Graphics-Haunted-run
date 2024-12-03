@@ -193,6 +193,7 @@ void myKeyboard(unsigned char button, int x, int y)
 void myUpdate(int value)
 {
 	game.update();
+
 	glutPostRedisplay();
 	glutTimerFunc(1000 / game.FPS, myUpdate, 0);
 }

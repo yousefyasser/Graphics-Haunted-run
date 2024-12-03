@@ -1,8 +1,9 @@
 #pragma once
 
-#include "include/gameobject.h"
+#include "gameobject.h"
 
-class Player : public GameObject {
+class Player : public GameObject
+{
 public:
   using GameObject::GameObject;
 

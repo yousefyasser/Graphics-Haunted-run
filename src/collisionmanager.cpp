@@ -1,9 +1,6 @@
-#include "include/gameobject.h"
+#include "include/collisionmanager.h"
 
-class CollisionManager {
-public:
-  // Check collision between two objects
-  static bool checkCollision(GameObject *obj1, GameObject *obj2) {
-    return obj1->checkCollision(obj2);
-  }
-};
+bool CollisionManager::checkCollision(GameObject *obj1, GameObject *obj2)
+{
+  return obj1->checkCollision(obj2);
+}
