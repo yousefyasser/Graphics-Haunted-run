@@ -23,10 +23,12 @@ void Game::update()
   camera.setup(FOVY, ASPECT_RATIO, ZNEAR, ZFAR);
   sun.update(dt);
   stateMachine.update(dt);
+  player.update(dt);
 }
 
 void Game::render() const
 {
   sun.render();
   stateMachine.render();
+  player.render();
 }

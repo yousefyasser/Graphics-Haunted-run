@@ -21,7 +21,6 @@ GLdouble zFar = game.ZFAR;
 Model_3DS model_house;
 Model_3DS model_tree;
 Model_3DS model_key;
-Model_3DS model_player;
 Model_3DS model_enemy;
 
 // Textures
@@ -107,13 +106,6 @@ void myDisplay(void)
 	// glScalef(0.1f, 0.1f, 0.1f);
 	// model_key.Draw();
 	// glPopMatrix();
-
-	// Draw player model
-	glPushMatrix();
-	glScalef(0.01f, 0.01f, 0.01f);
-	glRotatef(180, 0, 1, 0);
-	model_player.Draw();
-	glPopMatrix();
 
 	// Draw enemy model
 	// glPushMatrix();
@@ -207,7 +199,7 @@ void LoadAssets()
 	model_house.Load("Models/house/house.3DS");
 	model_tree.Load("Models/tree/Tree1.3ds");
 	model_key.Load("Models/key/key9albe.3DS");
-	model_player.Load("Models/boy/boy.3DS");
+	game.player.model_player.Load("Models/boy/boy.3DS");
 	model_enemy.Load("Models/enemy/enemy.3ds");
 
 	// Loading texture files
