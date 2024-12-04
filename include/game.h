@@ -22,13 +22,8 @@ public:
     const GLdouble ASPECT_RATIO;
 
 public:
-    int keyMode;
     KeyHandler keyhandler;
-
     StateMachine stateMachine;
-    Camera camera;
-    Sun sun;
-    Player player;
 
 private:
     float dt;
@@ -36,6 +31,7 @@ private:
 
 public:
     Game();
+    void start();
     void update();
     void render() const;
 };

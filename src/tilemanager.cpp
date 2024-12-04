@@ -1,23 +1,22 @@
 #include "include/tilemanager.h"
 #include <glut.h>
 
-TileManager::TileManager(float tileWidth, float tileHeight, int rows, int cols,
-                         float minX, float minZ, float maxX, float maxZ)
-    : tileWidth(tileWidth), tileHeight(tileHeight), rows(rows), cols(cols),
-      minX(minX), minZ(minZ), maxX(maxX), maxZ(maxZ)
+TileManager::TileManager(float tileWidth, float tileHeight, int rows, int cols, float startX, float startZ)
+	: tileWidth(tileWidth), tileHeight(tileHeight), rows(rows), cols(cols), startX(startX), startZ(startZ)
 {
-    groundMap.resize(rows);
-    for (int i = 0; i < rows; i++)
-    {
-        groundMap[i].resize(cols);
+	groundMap.resize(rows);
+	for (int i = 0; i < rows; i++)
+	{
+		groundMap[i].resize(cols);
 		for (int j = 0; j < cols; j++)
 		{
 			groundMap[i][j] = true;
 		}
-    }
+	}
 }
 
-void TileManager::load() {
+void TileManager::load()
+{
 	texture.Load("Textures/ground.bmp");
 }
 
@@ -25,21 +24,21 @@ void TileManager::update(float dt) {}
 
 void TileManager::render() const
 {
-	float x = minX;
-	float z = minZ;
-    for (auto row : groundMap)
-    {
-        for (auto tile : row)
-        {
-            if (tile)
-            {
-                renderTile(x, z);
-            }
+	float x = startX;
+	float z = startZ;
+	for (auto row : groundMap)
+	{
+		for (auto tile : row)
+		{
+			if (tile)
+			{
+				renderTile(x, z);
+			}
 			x += tileWidth;
-        }
+		}
 		z += tileHeight;
-		x = minX;
-    }
+		x = startX;
+	}
 }
 
 void TileManager::renderTile(float x, float z) const

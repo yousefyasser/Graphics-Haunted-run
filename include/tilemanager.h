@@ -6,8 +6,7 @@
 class TileManager
 {
 public:
-    TileManager(float tileWidth, float tileHeight, int rows, int cols,
-                float minX, float minZ, float maxX, float maxZ);
+    TileManager(float tileWidth, float tileHeight, int rows, int cols, float startX, float startZ);
     void load();
     void update(float dt);
     void render() const;
@@ -19,10 +18,8 @@ private:
     float tileHeight;
     int rows;
     int cols;
-    float minX;
-    float minZ;
-    float maxX;
-    float maxZ;
+    float startX;
+    float startZ;
 
 private:
     void renderTile(float x, float z) const;

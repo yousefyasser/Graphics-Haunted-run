@@ -21,9 +21,10 @@ class StateMachine
 {
 public:
     StateMachine(std::unordered_map<StateType, std::function<std::unique_ptr<BaseState>()>> states);
-    void change(StateType stateName, void *enterParams);
+    void change(StateType stateName, BaseState::BaseParams& enterParams);
     void update(float dt);
     void render() const;
+    BaseState& getCurrentState();
     StateType getCurrentStateType() const; 
 
 private:

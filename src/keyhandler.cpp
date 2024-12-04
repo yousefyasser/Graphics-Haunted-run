@@ -1,106 +1,124 @@
 #include "include/keyhandler.h"
 #include "include/game.h"
 #include "include/util.h"
+#include "include/states/scene1.h"
 
-KeyHandler::KeyHandler(Game &game): game(game){}
+KeyHandler::KeyHandler(Game &game) : game(game) {}
 
-void KeyHandler::keyDown(unsigned char key, int x, int y){
+void KeyHandler::keyDown(unsigned char key, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
     switch (key)
-	{
-        case 'm':
-            game.keyMode = (game.keyMode + 1) % 2;
-            break;
-        case 27:
-            exit(0);
-            break;
-        default:
-            break;
-	}
+    {
+    case 'm':
+        scene1.keyMode = (scene1.keyMode + 1) % 2;
+        break;
+    case 27:
+        exit(0);
+        break;
+    default:
+        break;
+    }
 
-    if(game.keyMode){
+    if (scene1.keyMode)
+    {
         cameraKeyDown(key, x, y);
-    }else {
+    }
+    else
+    {
         playerKeyDown(key, x, y);
     }
 }
 
-void KeyHandler::keyUp(unsigned char key, int x, int y){
-    if(!game.keyMode){
+void KeyHandler::keyUp(unsigned char key, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    if (!scene1.keyMode)
+    {
         playerKeyUp(key, x, y);
     }
 }
 
-void KeyHandler::cameraKeyDown(unsigned char key, int x, int y){
-    Vector3f characterDirection = game.camera.getRelativeCharacterDir(game.player.angle);
-    Vector3f characterPosition = game.camera.getRelativeCharacterPosition(game.player.position);
+void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    Vector3f characterDirection = scene1.camera.getRelativeCharacterDir(scene1.player.angle);
+    Vector3f characterPosition = scene1.camera.getRelativeCharacterPosition(scene1.player.position);
 
-    const float d = 3.0f;
+    const float d = 1.5f;
     const float a = 1.0f;
 
-    switch(key) {
-        case 'w':
-            game.camera.moveY(d);
-            break;
-        case 's':
-            game.camera.moveY(-d);
-            break;
-        case 'd':
-            game.camera.moveX(-d);
-            break;
-        case 'a':
-            game.camera.moveX(d);
-            break;
-        case 'q':
-            game.camera.moveZ(d);
-            break;
-        case 'e':
-            game.camera.moveZ(-d);
-            break;
+    switch (key)
+    {
+    case 'w':
+        scene1.camera.moveY(d);
+        break;
+    case 's':
+        scene1.camera.moveY(-d);
+        break;
+    case 'd':
+        scene1.camera.moveX(-d);
+        break;
+    case 'a':
+        scene1.camera.moveX(d);
+        break;
+    case 'q':
+        scene1.camera.moveZ(d);
+        break;
+    case 'e':
+        scene1.camera.moveZ(-d);
+        break;
 
-        case 'i':
-            game.camera.rotateX(a);
-            break;
-        case 'k':
-            game.camera.rotateX(-a);
-            break;
-        case 'l':
-            game.camera.rotateY(-a);
-            break;
-        case 'j':
-            game.camera.rotateY(a);
-            break;
-        case 'u':
-            game.camera.rotateZ(a);
-            break;
-        case 'o':
-            game.camera.rotateZ(-a);
-            break;
+    case 'i':
+        scene1.camera.rotateX(a);
+        break;
+    case 'k':
+        scene1.camera.rotateX(-a);
+        break;
+    case 'l':
+        scene1.camera.rotateY(-a);
+        break;
+    case 'j':
+        scene1.camera.rotateY(a);
+        break;
+    case 'u':
+        scene1.camera.rotateZ(a);
+        break;
+    case 'o':
+        scene1.camera.rotateZ(-a);
+        break;
 
-        case '1':
-            game.camera.setFirstPersonView(characterPosition, characterDirection);
-            break;
-        case '3':
-            game.camera.setThirdPersonView(characterPosition, characterDirection, 20.0f, 15.0f);
-            break;
+    case '1':
+        scene1.camera.setFirstPersonView(characterPosition, characterDirection);
+        break;
+    case '3':
+        scene1.camera.setThirdPersonView(characterPosition, characterDirection, 20.0f, 15.0f);
+        break;
     }
 }
 
-void KeyHandler::playerKeyDown(unsigned char key, int x, int y){
-    switch(key){
-        case 'a':
-            game.player.velocity.x = game.player.MAX_SPEED;
-            break;
-        case 'd':
-            game.player.velocity.x = -game.player.MAX_SPEED;
-            break;
+void KeyHandler::playerKeyDown(unsigned char key, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    switch (key)
+    {
+    case 'a':
+        scene1.player.velocity.x = scene1.player.MAX_SPEED;
+        break;
+    case 'd':
+        scene1.player.velocity.x = -scene1.player.MAX_SPEED;
+        break;
     }
 }
 
-void KeyHandler::playerKeyUp(unsigned char key, int x, int y){
-    switch(key){
-        case 'a':
-        case 'd':
-            game.player.velocity.x = 0;
-            break;
+void KeyHandler::playerKeyUp(unsigned char key, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    switch (key)
+    {
+    case 'a':
+    case 'd':
+        scene1.player.velocity.x = 0;
+        break;
     }
 }

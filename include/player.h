@@ -17,4 +17,5 @@ public:
   
   void update(float dt) override;
   void render() const override;
+  void load();
 };

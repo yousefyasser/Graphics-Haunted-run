@@ -6,7 +6,7 @@
 
 Camera::Camera(float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) : eye(eyeX, eyeY, eyeZ), center(centerX, centerY, centerZ), up(upX, upY, upZ) {}
 
-void Camera::setup(GLdouble fovy, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar)
+void Camera::setup() const
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -81,7 +81,7 @@ void Camera::setThirdPersonView(const Vector3f &characterPosition, const Vector3
     look();
 }
 
-void Camera::look()
+void Camera::look() const
 {
     gluLookAt(
         eye.x, eye.y, eye.z,

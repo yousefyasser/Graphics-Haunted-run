@@ -5,7 +5,7 @@
 StateMachine::StateMachine(std::unordered_map<StateType, std::function<std::unique_ptr<BaseState>()>> states)
     : states(states), current(std::make_unique<EmptyState>()), currentStateType(StateType::Empty) {}
 
-void StateMachine::change(StateType stateName, void *enterParams)
+void StateMachine::change(StateType stateName, BaseState::BaseParams& enterParams)
 {
     assert(states.find(stateName) != states.end());
     current->exit();
@@ -22,6 +22,11 @@ void StateMachine::update(float dt)
 void StateMachine::render() const
 {
     current->render();
+}
+
+BaseState& StateMachine::getCurrentState()
+{
+    return *current;
 }
 
 StateType StateMachine::getCurrentStateType() const
