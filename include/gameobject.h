@@ -6,6 +6,7 @@
 class GameObject {
 public:
     Vector3f position;
+    Vector3f angle;
     BoundingBox boundingBox;
 
     GameObject();
@@ -16,4 +17,6 @@ public:
     void print();
     virtual BoundingBox calculateBoundingBox() = 0;
     virtual bool checkCollision(const GameObject *other);
+    virtual void update(float dt) = 0;
+    virtual void render() = 0;
 };
