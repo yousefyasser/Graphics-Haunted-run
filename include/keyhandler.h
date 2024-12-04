@@ -1,7 +1,6 @@
 #pragma once
 
 class Game;
-
 class KeyHandler
 {
 public:
@@ -13,4 +12,7 @@ public:
 
 private:
     Game &game;
+
+    void cameraKeyDown(unsigned char key, int x, int y);
+    void playerKeyDown(unsigned char key, int x, int y);
 };
