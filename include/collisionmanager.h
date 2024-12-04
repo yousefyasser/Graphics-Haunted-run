@@ -1,8 +1,9 @@
 #pragma once
 
-#include "include/gameobject.h"
+#include "gameobject.h"
 
-class CollisionManager {
+class CollisionManager
+{
 public:
-  static bool checkCollision(GameObject *obj1, GameObject *obj2);
+  static bool checkCollision(const GameObject &obj1, const GameObject &obj2);
 };

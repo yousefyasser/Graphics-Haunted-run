@@ -21,7 +21,7 @@ public:
   Vector3f getPosition();
   void print();
   virtual BoundingBox calculateBoundingBox() = 0;
-  virtual bool checkCollision(const GameObject *other);
+  virtual bool checkCollision(const GameObject &other) const;
   virtual void update(float dt) = 0;
   virtual void render() const = 0;
 };

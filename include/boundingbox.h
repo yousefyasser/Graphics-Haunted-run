@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/vector3f.h"
+#include "vector3f.h"
 #include <stdio.h>
 
 class BoundingBox {

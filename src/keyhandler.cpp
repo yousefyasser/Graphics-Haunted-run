@@ -34,43 +34,46 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y){
     Vector3f characterDirection = game.camera.getRelativeCharacterDir(game.player.angle);
     Vector3f characterPosition = game.camera.getRelativeCharacterPosition(game.player.position);
 
+    const float d = 3.0f;
+    const float a = 1.0f;
+
     switch(key) {
         case 'w':
-            game.camera.moveY(1.0f);
+            game.camera.moveY(d);
             break;
         case 's':
-            game.camera.moveY(-1.0f);
+            game.camera.moveY(-d);
             break;
         case 'd':
-            game.camera.moveX(-1.0f);
+            game.camera.moveX(-d);
             break;
         case 'a':
-            game.camera.moveX(1.0f);
+            game.camera.moveX(d);
             break;
         case 'q':
-            game.camera.moveZ(1.0f);
+            game.camera.moveZ(d);
             break;
         case 'e':
-            game.camera.moveZ(-1.0f);
+            game.camera.moveZ(-d);
             break;
 
         case 'i':
-            game.camera.rotateX(1.0f);
+            game.camera.rotateX(a);
             break;
         case 'k':
-            game.camera.rotateX(-1.0f);
+            game.camera.rotateX(-a);
             break;
         case 'l':
-            game.camera.rotateY(-1.0f);
+            game.camera.rotateY(-a);
             break;
         case 'j':
-            game.camera.rotateY(1.0f);
+            game.camera.rotateY(a);
             break;
         case 'u':
-            game.camera.rotateZ(1.0f);
+            game.camera.rotateZ(a);
             break;
         case 'o':
-            game.camera.rotateZ(-1.0f);
+            game.camera.rotateZ(-a);
             break;
 
         case '1':

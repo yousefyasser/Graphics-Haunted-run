@@ -3,7 +3,6 @@
 #include "Model_3DS.h"
 #include "gameobject.h"
 #include <glut.h>
-#include <glut.h>
 
 class Collectable : public GameObject {
 public:
