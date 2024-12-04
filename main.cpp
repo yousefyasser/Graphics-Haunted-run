@@ -78,7 +78,7 @@ void myDisplay(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Draw Ground
-	// RenderGround();
+	RenderGround();
 
 	// Draw Tree Model
 	// glPushMatrix();
@@ -117,60 +117,14 @@ void myDisplay(void)
 //=======================================================================
 void myKeyboard(unsigned char button, int x, int y)
 {
-	switch (button)
-	{
-	case 'w':
-		game.camera.moveY(1.0f);
-		break;
-	case 's':
-		game.camera.moveY(-1.0f);
-		break;
-	case 'd':
-		game.camera.moveX(-1.0f);
-		break;
-	case 'a':
-		game.camera.moveX(1.0f);
-		break;
-	case 'q':
-		game.camera.moveZ(1.0f);
-		break;
-	case 'e':
-		game.camera.moveZ(-1.0f);
-		break;
+	game.keyhandler.keyDown(button, x, y);
 
-	case 'i':
-		game.camera.rotateX(1.0f);
-		break;
-	case 'k':
-		game.camera.rotateX(-1.0f);
-		break;
-	case 'l':
-		game.camera.rotateY(-1.0f);
-		break;
-	case 'j':
-		game.camera.rotateY(1.0f);
-		break;
-	case 'u':
-		game.camera.rotateZ(1.0f);
-		break;
-	case 'o':
-		game.camera.rotateZ(-1.0f);
-		break;
+	glutPostRedisplay();
+}
 
-	case '1':
-		// TODO: add first person view when player is implemented
-		// game.camera.setFirstPersonView(characterPosition, characterDirection);
-		break;
-	case '3':
-		// TODO: add third person view when player is implemented
-		// game.camera.setFirstPersonView(characterPosition, characterDirection, 10.0f, 5.0f);
-		break;
-	case 27:
-		exit(0);
-		break;
-	default:
-		break;
-	}
+void myKeyboardUp(unsigned char button, int x, int y)
+{
+	game.keyhandler.keyUp(button, x, y);
 
 	glutPostRedisplay();
 }
@@ -219,6 +173,7 @@ void main(int argc, char **argv)
 	glutDisplayFunc(myDisplay);
 
 	glutKeyboardFunc(myKeyboard);
+	glutKeyboardUpFunc(myKeyboardUp);
 
 	myInit();
 

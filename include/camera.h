@@ -20,4 +20,7 @@ public:
     void Camera::setFirstPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection);
     void Camera::setThirdPersonView(const Vector3f& characterPosition, const Vector3f& characterDirection, float distance, float height);
     void look();
+
+    Vector3f getRelativeCharacterPosition(Vector3f characterPosition);
+    Vector3f getRelativeCharacterDir(Vector3f characterAngle);
 };

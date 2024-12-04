@@ -3,9 +3,13 @@
 #include "include/game.h"
 
 Game::Game()
-    : WINDOW_WIDTH(1280), WINDOW_HEIGHT(720), FPS(60),
-      FOVY(45.0), ZNEAR(0.1), ZFAR(1000), ASPECT_RATIO((GLdouble)WINDOW_WIDTH / (GLdouble)WINDOW_HEIGHT),
-      dt(0.0f), camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f), sun(GL_LIGHT1), player(Vector3f(1, 1, 1)),
+    : WINDOW_WIDTH(1280), WINDOW_HEIGHT(720), FPS(60), dt(0.0f),
+      ASPECT_RATIO((GLdouble)WINDOW_WIDTH / (GLdouble)WINDOW_HEIGHT), 
+      FOVY(45.0), ZNEAR(0.1), ZFAR(1000), keyMode(0),
+      keyhandler(*this),
+      sun(GL_LIGHT1), 
+      player(Vector3f(0, 4, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0)), 
+      camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f), 
       stateMachine({{StateType::Empty, []()
                      { return std::make_unique<EmptyState>(); }}})
 {

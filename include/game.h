@@ -2,6 +2,7 @@
 
 #include <chrono>
 
+#include "keyhandler.h"
 #include "camera.h"
 #include "statemachine.h"
 #include "sun.h"
@@ -21,6 +22,9 @@ public:
     const GLdouble ASPECT_RATIO;
 
 public:
+    int keyMode;
+    KeyHandler keyhandler;
+
     StateMachine stateMachine;
     Camera camera;
     Sun sun;
