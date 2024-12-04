@@ -34,13 +34,6 @@ void myInit(void)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	game.camera.setup(fovy, aspectRatio, zNear, zFar);
-	//*******************************************************************************************//
-	// EYE (ex, ey, ez): defines the location of the camera.									 //
-	// Center (cx, cy, cz):	 denotes the direction where the camera is aiming at.				 //
-	// UP (ux, uy, uz):  denotes the upward orientation of the camera.							 //
-	//*******************************************************************************************//
-
-	// util::setupLights();
 	game.sun.setup();
 	util::setupMaterials();
 }
@@ -199,8 +192,9 @@ void LoadAssets()
 	model_house.Load("Models/house/house.3DS");
 	model_tree.Load("Models/tree/Tree1.3ds");
 	model_key.Load("Models/key/key9albe.3DS");
-	game.player.model_player.Load("Models/boy/boy.3DS");
 	model_enemy.Load("Models/enemy/enemy.3ds");
+
+	game.player.model_player.Load("Models/boy/boy.3DS");
 
 	// Loading texture files
 	tex_ground.Load("Textures/ground.bmp");
