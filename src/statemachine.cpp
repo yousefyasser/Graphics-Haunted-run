@@ -3,7 +3,7 @@
 #include "include/statemachine.h"
 
 StateMachine::StateMachine(std::unordered_map<StateType, std::function<std::unique_ptr<BaseState>()>> states)
-    : states(states), current(std::make_unique<EmptyState>()) {}
+    : states(states), current(std::make_unique<EmptyState>()), currentStateType(StateType::Empty) {}
 
 void StateMachine::change(StateType stateName, void *enterParams)
 {
