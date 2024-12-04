@@ -5,6 +5,13 @@ GameObject::GameObject() {}
 GameObject::GameObject(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle)
                       : position(initialPosition), velocity(initialVelocity), angle(initialAngle) {}
 
+GameObject::GameObject(const Vector3f &initialPosition)
+    : position(initialPosition) {}
+
+GameObject::GameObject(const Vector3f &initialPosition,
+                       const Vector3f &initialAngle)
+    : position(initialPosition), angle(initialAngle) {}
+
 void GameObject::setPosition(const Vector3f &newPosition) {
   this->position = newPosition;
   boundingBox = calculateBoundingBox();

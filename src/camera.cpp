@@ -1,7 +1,5 @@
 #include <cmath>
-#include <glut.h>
 
-#include "include/vector3f.h"
 #include "include/camera.h"
 #include "include/util.h"
 #include "include/camera.h"
