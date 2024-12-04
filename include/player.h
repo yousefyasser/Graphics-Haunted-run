@@ -11,7 +11,7 @@ public:
 
   using GameObject::GameObject;
 
-  Player(const Vector3f &initialPosition);
+  Player(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle);
 
   BoundingBox calculateBoundingBox() override;
   

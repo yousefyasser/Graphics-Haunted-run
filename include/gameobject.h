@@ -5,12 +5,15 @@
 
 class GameObject {
 public:
+    const float MAX_SPEED = 0.5f;
+
+    Vector3f velocity;
     Vector3f position;
     Vector3f angle;
     BoundingBox boundingBox;
 
     GameObject();
-    GameObject(const Vector3f &initialPosition);
+    GameObject(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle);
 
     void setPosition(const Vector3f &newPosition);
     Vector3f getPosition();

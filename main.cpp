@@ -129,6 +129,13 @@ void myKeyboard(unsigned char button, int x, int y)
 	glutPostRedisplay();
 }
 
+void myKeyboardUp(unsigned char button, int x, int y)
+{
+	game.keyhandler.keyUp(button, x, y);
+
+	glutPostRedisplay();
+}
+
 void myUpdate(int value)
 {
 	game.update();
@@ -172,6 +179,7 @@ void main(int argc, char **argv)
 	glutDisplayFunc(myDisplay);
 
 	glutKeyboardFunc(myKeyboard);
+	glutKeyboardUpFunc(myKeyboardUp);
 
 	myInit();
 

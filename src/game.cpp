@@ -8,7 +8,7 @@ Game::Game()
       FOVY(45.0), ZNEAR(0.1), ZFAR(1000), keyMode(0),
       keyhandler(*this),
       sun(GL_LIGHT1), 
-      player(Vector3f(1, 1, 1)), 
+      player(Vector3f(0, 4, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0)), 
       camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f), 
       stateMachine({{StateType::Empty, []()
                      { return std::make_unique<EmptyState>(); }}})

@@ -1,5 +1,6 @@
 #include "include/keyhandler.h"
 #include "include/game.h"
+#include "include/util.h"
 
 KeyHandler::KeyHandler(Game &game): game(game){}
 
@@ -23,7 +24,16 @@ void KeyHandler::keyDown(unsigned char key, int x, int y){
     }
 }
 
+void KeyHandler::keyUp(unsigned char key, int x, int y){
+    if(!game.keyMode){
+        playerKeyUp(key, x, y);
+    }
+}
+
 void KeyHandler::cameraKeyDown(unsigned char key, int x, int y){
+    Vector3f characterDirection = game.camera.getRelativeCharacterDir(game.player.angle);
+    Vector3f characterPosition = game.camera.getRelativeCharacterPosition(game.player.position);
+
     switch(key) {
         case 'w':
             game.camera.moveY(1.0f);
@@ -64,10 +74,10 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y){
             break;
 
         case '1':
-            game.camera.setFirstPersonView(game.player.position, game.player.angle);
+            game.camera.setFirstPersonView(characterPosition, characterDirection);
             break;
         case '3':
-            game.camera.setThirdPersonView(game.player.position, game.player.angle, 10.0f, 5.0f);
+            game.camera.setThirdPersonView(characterPosition, characterDirection, 20.0f, 15.0f);
             break;
     }
 }
@@ -75,10 +85,19 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y){
 void KeyHandler::playerKeyDown(unsigned char key, int x, int y){
     switch(key){
         case 'a':
-            // TODO: move player left
+            game.player.velocity.x = game.player.MAX_SPEED;
             break;
         case 'd':
-            // TODO: move player right
+            game.player.velocity.x = -game.player.MAX_SPEED;
+            break;
+    }
+}
+
+void KeyHandler::playerKeyUp(unsigned char key, int x, int y){
+    switch(key){
+        case 'a':
+        case 'd':
+            game.player.velocity.x = 0;
             break;
     }
 }

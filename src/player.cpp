@@ -1,6 +1,7 @@
 #include "include/player.h"
 
-Player::Player(const Vector3f &initialPosition) : GameObject(initialPosition)
+Player::Player(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle) 
+            : GameObject(initialPosition, initialVelocity, initialAngle)
 {
   boundingBox = calculateBoundingBox();
 }
@@ -13,13 +14,14 @@ BoundingBox Player::calculateBoundingBox()
 }
 
 void Player::update(float dt){
-
+	position += velocity;
 }
 
 void Player::render() const {
 	glPushMatrix();
+  glTranslatef(position.x, position.y, position.z);
 	glScalef(0.01f, 0.01f, 0.01f);
-	glRotatef(180, 0, 1, 0);
+	glRotatef(angle.y, 0, 1, 0);
 	model_player.Draw();
 	glPopMatrix();
 }

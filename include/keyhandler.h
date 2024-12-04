@@ -15,4 +15,5 @@ private:
 
     void cameraKeyDown(unsigned char key, int x, int y);
     void playerKeyDown(unsigned char key, int x, int y);
+    void playerKeyUp(unsigned char key, int x, int y);
 };
