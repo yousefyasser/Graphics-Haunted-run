@@ -18,5 +18,5 @@ public:
     virtual BoundingBox calculateBoundingBox() = 0;
     virtual bool checkCollision(const GameObject *other);
     virtual void update(float dt) = 0;
-    virtual void render() = 0;
+    virtual void render() const = 0;
 };
