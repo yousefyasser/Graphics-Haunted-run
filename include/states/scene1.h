@@ -29,7 +29,7 @@ public:
     void render() const override;
 
 public:
-    int keyMode = 0;
+    int keyMode;
     Camera camera;
     Sun sun;
     Player player;

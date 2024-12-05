@@ -1,12 +1,11 @@
-#include <iostream>
-
 #include "include/states/scene1.h"
 
 Scene1::Scene1()
     : camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f),
       sun(GL_LIGHT1),
       player(Vector3f(0, 5, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0)),
-      tileManager(10, 10, 20, 3, -15, -15) {}
+      tileManager(15, 10, 20, 3, -22.5, -15, 10.0f),
+      keyMode(0) {}
 
 void Scene1::enter(const BaseParams &params)
 {
