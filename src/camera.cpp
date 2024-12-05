@@ -106,3 +106,33 @@ Vector3f Camera::getRelativeCharacterDir(Vector3f characterAngle){
 
     return relativeCharacterDir;
 }
+
+void Camera::update(float dt, Vector3f playerPosition, Vector3f playerAngle){
+    Vector3f characterPos = getRelativeCharacterPosition(playerPosition);
+    Vector3f characterDir = getRelativeCharacterDir(playerAngle);
+
+    switch(cameraMode){
+        case CameraMode::FIRST_PERSON:
+            setFirstPersonView(characterPos, characterDir);
+            break;
+        case CameraMode::THIRD_PERSON:
+            setThirdPersonView(characterPos, characterDir, 20.0f, 15.0f);
+            break;
+        case CameraMode::FREE_MODE:
+            break;
+    }
+}
+
+void Camera::toggleCameraMode(){
+    switch (cameraMode) {
+        case CameraMode::FIRST_PERSON:
+            cameraMode = CameraMode::THIRD_PERSON;
+            break;
+        case CameraMode::THIRD_PERSON:
+            cameraMode = CameraMode::FREE_MODE;
+            break;
+        case CameraMode::FREE_MODE:
+            cameraMode = CameraMode::FIRST_PERSON;
+            break;
+    }
+}
