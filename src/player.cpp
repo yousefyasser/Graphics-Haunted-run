@@ -1,11 +1,5 @@
 #include "include/player.h"
 
-Player::Player(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle)
-    : GameObject(initialPosition, initialVelocity, initialAngle)
-{
-  boundingBox = calculateBoundingBox();
-}
-
 void Player::update(float dt)
 {
   position += velocity;

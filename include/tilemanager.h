@@ -13,6 +13,8 @@ public:
     bool getTile(int row, int col) const;
     bool isHole(float x, float z) const;
 
+    const float SPEED;
+
 private:
     GLTexture texture;
     std::vector<std::vector<bool>> groundMap;
@@ -26,7 +28,6 @@ private:
     float startZ;
 
 private:
-    const float SPEED;
     const float START_X;
     const float START_Z;
 

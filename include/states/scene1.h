@@ -3,6 +3,8 @@
 #include "../sun.h"
 #include "../player.h"
 #include "../tilemanager.h"
+#include "../spawnables/collectable.h"
+#include "../spawnables/spawnableManager.h"
 
 #include <glut.h>
 
@@ -34,4 +36,5 @@ public:
     Sun sun;
     Player player;
     TileManager tileManager;
+    std::vector<std::unique_ptr<Collectable>> collectables;
 };

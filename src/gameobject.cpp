@@ -3,14 +3,20 @@
 GameObject::GameObject() {}
 
 GameObject::GameObject(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle)
-    : position(initialPosition), velocity(initialVelocity), angle(initialAngle) {}
+    : position(initialPosition), velocity(initialVelocity), angle(initialAngle) {
+      boundingBox = calculateBoundingBox();
+    }
 
 GameObject::GameObject(const Vector3f &initialPosition)
-    : position(initialPosition) {}
+    : position(initialPosition) {
+      boundingBox = calculateBoundingBox();
+    }
 
 GameObject::GameObject(const Vector3f &initialPosition,
                        const Vector3f &initialAngle)
-    : position(initialPosition), angle(initialAngle) {}
+    : position(initialPosition), angle(initialAngle) {
+      boundingBox = calculateBoundingBox();
+    }
 
 BoundingBox GameObject::calculateBoundingBox()
 {

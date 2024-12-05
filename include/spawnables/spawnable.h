@@ -6,5 +6,5 @@ class Spawnable: public GameObject {
 public:
   using GameObject::GameObject;
 
-  static void spawn();
+  const float SPAWN_RATE = 0.2f;
 };
