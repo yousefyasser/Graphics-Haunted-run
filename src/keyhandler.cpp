@@ -42,8 +42,6 @@ void KeyHandler::keyUp(unsigned char key, int x, int y)
 void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
 {
     Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    Vector3f characterDirection = scene1.camera.getRelativeCharacterDir(scene1.player.angle);
-    Vector3f characterPosition = scene1.camera.getRelativeCharacterPosition(scene1.player.position);
 
     const float d = 1.5f;
     const float a = 1.0f;
@@ -87,12 +85,8 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
     case 'o':
         scene1.camera.rotateZ(-a);
         break;
-
     case '1':
-        scene1.camera.setFirstPersonView(characterPosition, characterDirection);
-        break;
-    case '3':
-        scene1.camera.setThirdPersonView(characterPosition, characterDirection, 20.0f, 15.0f);
+        scene1.camera.toggleCameraMode();
         break;
     }
 }

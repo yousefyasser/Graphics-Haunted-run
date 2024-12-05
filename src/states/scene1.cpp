@@ -26,6 +26,7 @@ void Scene1::update(float dt)
     sun.update(dt);
     player.update(dt);
     tileManager.update(dt);
+    camera.update(dt, player.position, player.angle);
 }
 
 void Scene1::render() const
