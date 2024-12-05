@@ -17,7 +17,6 @@ void Scene1::enter(const BaseParams &params)
 
     player.load();
     tileManager.load();
-    Collectable::spawn(collectables, tileManager.SPEED);
 }
 
 void Scene1::exit() {}
@@ -28,8 +27,7 @@ void Scene1::update(float dt)
     player.update(dt);
     tileManager.update(dt);
     camera.update(dt, player.position, player.angle);
-
-    SpawnableManager::update(dt, collectables);
+    spawnableManager.update(dt, collectables, tileManager.SPEED);
 }
 
 void Scene1::render() const
@@ -38,6 +36,5 @@ void Scene1::render() const
     sun.render();
     player.render();
     tileManager.render();
-    
-    SpawnableManager::render(collectables);
+    spawnableManager.render(collectables);
 }

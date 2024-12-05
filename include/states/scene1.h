@@ -36,5 +36,6 @@ public:
     Sun sun;
     Player player;
     TileManager tileManager;
+    SpawnableManager spawnableManager;
     std::vector<std::unique_ptr<Collectable>> collectables;
 };

@@ -17,12 +17,3 @@ void Collectable::render() const {
   model.Draw();
   glPopMatrix();
 }
-
-void Collectable::spawn(std::vector<std::unique_ptr<Collectable>> &collectables, float groundSpeed)
-{
-  Vector3f pos(0, 3, 100), vel(0, 0, -groundSpeed), angle(0, 0, 0);
-
-  auto newCollectable = std::make_unique<Collectable>(pos, vel, angle);
-  newCollectable->load();
-  collectables.push_back(std::move(newCollectable));
-}
