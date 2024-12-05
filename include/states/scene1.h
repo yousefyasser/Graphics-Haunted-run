@@ -2,7 +2,8 @@
 #include "../camera.h"
 #include "../sun.h"
 #include "../player.h"
-#include "../tilemanager.h"
+#include "../groundmanager.h"
+#include "../wallmanager.h"
 
 #include <glut.h>
 
@@ -33,5 +34,6 @@ public:
     Camera camera;
     Sun sun;
     Player player;
-    TileManager tileManager;
+    GroundManager groundManager;
+    WallManager wallManager;
 };
