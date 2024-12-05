@@ -4,9 +4,14 @@
 #include "stdlib.h"
 #include <glut.h>
 
+enum class CameraMode{
+    FIRST_PERSON, THIRD_PERSON, FREE_MODE
+};
+
 class Camera
 {
 public:
+    CameraMode cameraMode = CameraMode::THIRD_PERSON;
     Vector3f eye, center, up;
     GLdouble fovy, aspectRatio, zNear, zFar;
 
@@ -20,10 +25,13 @@ public:
     void rotateX(float a);
     void rotateY(float a);
     void rotateZ(float a);
-    void Camera::setFirstPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection);
-    void Camera::setThirdPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection, float distance, float height);
+    void setFirstPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection);
+    void setThirdPersonView(const Vector3f &characterPosition, const Vector3f &characterDirection, float distance, float height);
     void look() const;
 
     Vector3f getRelativeCharacterPosition(Vector3f characterPosition);
     Vector3f getRelativeCharacterDir(Vector3f characterAngle);
+
+    void update(float dt, Vector3f playerPosition, Vector3f playerAngle);
+    void Camera::toggleCameraMode();
 };
