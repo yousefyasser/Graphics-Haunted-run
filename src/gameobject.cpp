@@ -12,6 +12,13 @@ GameObject::GameObject(const Vector3f &initialPosition,
                        const Vector3f &initialAngle)
     : position(initialPosition), angle(initialAngle) {}
 
+BoundingBox GameObject::calculateBoundingBox()
+{
+  return BoundingBox(
+      Vector3f(position.x - 0.05, position.y, position.z - 0.05),
+      Vector3f(position.x + 0.05, position.y + 0.2, position.z + 0.05));
+}
+
 void GameObject::setPosition(const Vector3f &newPosition)
 {
   this->position = newPosition;
