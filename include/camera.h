@@ -34,4 +34,5 @@ public:
 
     void update(float dt, Vector3f playerPosition, Vector3f playerAngle);
     void Camera::toggleCameraMode();
+    void Camera::toggleCameraFreeMode();
 };

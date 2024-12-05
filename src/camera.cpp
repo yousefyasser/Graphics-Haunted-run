@@ -124,15 +124,17 @@ void Camera::update(float dt, Vector3f playerPosition, Vector3f playerAngle){
 }
 
 void Camera::toggleCameraMode(){
-    switch (cameraMode) {
-        case CameraMode::FIRST_PERSON:
-            cameraMode = CameraMode::THIRD_PERSON;
-            break;
-        case CameraMode::THIRD_PERSON:
-            cameraMode = CameraMode::FREE_MODE;
-            break;
-        case CameraMode::FREE_MODE:
-            cameraMode = CameraMode::FIRST_PERSON;
-            break;
+    if (cameraMode == CameraMode::FIRST_PERSON){
+        cameraMode = CameraMode::THIRD_PERSON;
+    } else {
+        cameraMode = CameraMode::FIRST_PERSON;
+    }
+}
+
+void Camera::toggleCameraFreeMode() {
+    if (cameraMode == CameraMode::FREE_MODE) {
+        cameraMode = CameraMode::THIRD_PERSON;
+    } else {
+        cameraMode = CameraMode::FREE_MODE;
     }
 }

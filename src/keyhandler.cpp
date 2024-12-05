@@ -12,6 +12,10 @@ void KeyHandler::keyDown(unsigned char key, int x, int y)
     {
     case 'm':
         scene1.keyMode = (scene1.keyMode + 1) % 2;
+        scene1.camera.toggleCameraFreeMode();
+        break;
+    case '1':
+        scene1.camera.toggleCameraMode();
         break;
     case 27:
         exit(0);
@@ -84,9 +88,6 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
         break;
     case 'o':
         scene1.camera.rotateZ(-a);
-        break;
-    case '1':
-        scene1.camera.toggleCameraMode();
         break;
     }
 }
