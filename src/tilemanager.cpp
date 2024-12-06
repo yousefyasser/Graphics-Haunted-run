@@ -1,107 +1,52 @@
 #include "include/tilemanager.h"
 #include <glut.h>
 
-TileManager::TileManager(float tileWidth, float tileHeight, int rows, int cols, float startX, float startZ, float speed)
-	: tileWidth(tileWidth), tileHeight(tileHeight), rows(rows), cols(cols), startX(startX), startZ(startZ),
-	  SPEED(speed), START_X(startX), START_Z(startZ)
-{
-	groundMap.resize(rows);
-	for (int i = 0; i < rows; i++)
-	{
-		groundMap[i].resize(cols);
-		for (int j = 0; j < cols; j++)
-		{
-			groundMap[i][j] = true;
-		}
-	}
-}
+TileManager::TileManager(float tileWidth, float tileHeight, int rows, int cols,
+						 float startMainAxis, float startSecondaryAxis, float constantAxis,
+						 float speed, const char *texturePath)
+	: tileWidth(tileWidth), tileHeight(tileHeight), rows(rows), cols(cols),
+	  startMainAxis(startMainAxis), startSecondaryAxis(startSecondaryAxis), constantAxis(constantAxis),
+	  tileMap(rows, std::vector<bool>(cols, true)),
+	  SPEED(speed), START_MAIN_AXIS(startMainAxis), START_SECONDARY_AXIS(startSecondaryAxis),
+	  TEXTURE_PATH(texturePath) {}
 
 void TileManager::load()
 {
-	texture.Load("Textures/ground.bmp");
-}
-
-void TileManager::update(float dt)
-{
-	startZ -= SPEED * dt;
-	if(startZ <= START_Z - tileHeight)
-	{
-		startZ = START_Z;
-		generateRow();
-	}
-}
-
-void TileManager::generateRow()
-{
-	groundMap.erase(groundMap.begin());
-	groundMap.emplace_back(cols, true);
-	if (rand() % 100 < 90)
-	{
-		int hole = rand() % cols;
-		groundMap[rows - 1][hole] = false;
-	}
+	texture.Load(const_cast<char *>(TEXTURE_PATH));
 }
 
 void TileManager::render() const
 {
-	float x = startX;
-	float z = startZ;
-	for (auto row : groundMap)
+	float mainAxis = startMainAxis;
+	float secondaryAxis = startSecondaryAxis;
+	for (auto row : tileMap)
 	{
 		for (auto tile : row)
 		{
 			if (tile)
 			{
-				renderTile(x, z);
+				renderTile(mainAxis, secondaryAxis);
+			} else {
+				renderHole(mainAxis, secondaryAxis);
 			}
-			x += tileWidth;
+			secondaryAxis += tileWidth;
 		}
-		z += tileHeight;
-		x = startX;
+		mainAxis += tileHeight;
+		secondaryAxis = startSecondaryAxis;
 	}
 }
 
-void TileManager::renderTile(float x, float z) const
+void TileManager::update(float dt)
 {
-	glDisable(GL_LIGHTING);
-
-	glColor3f(0.6, 0.6, 0.6);
-
-	glEnable(GL_TEXTURE_2D);
-
-	glBindTexture(GL_TEXTURE_2D, texture.texture[0]);
-
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0, 0);
-	glVertex3f(x, 0, z);
-	glTexCoord2f(1, 0);
-	glVertex3f(x + tileWidth, 0, z);
-	glTexCoord2f(1, 1);
-	glVertex3f(x + tileWidth, 0, z + tileHeight);
-	glTexCoord2f(0, 1);
-	glVertex3f(x, 0, z + tileHeight);
-	glEnd();
-	glPopMatrix();
-
-	glEnable(GL_LIGHTING);
-
-	glColor3f(1, 1, 1);
+	startMainAxis -= SPEED * dt;
+	if (startMainAxis <= START_MAIN_AXIS - tileHeight)
+	{
+		startMainAxis = START_MAIN_AXIS;
+		updateMap();
+	}
 }
 
 bool TileManager::getTile(int row, int col) const
 {
-	return groundMap[row][col];
-}
-
-bool TileManager::isHole(float x, float z) const
-{
-	int col = (x - startX) / tileWidth;
-	int row = (z - startZ) / tileHeight;
-	if (row < 0 || row >= rows || col < 0 || col >= cols)
-	{
-		return false;
-	}
-	return !groundMap[row][col];
+	return tileMap[row][col];
 }

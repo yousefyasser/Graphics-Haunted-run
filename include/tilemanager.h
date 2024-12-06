@@ -6,32 +6,36 @@
 class TileManager
 {
 public:
-    TileManager(float tileWidth, float tileHeight, int rows, int cols, float startX, float startZ, float speed);
-    void load();
-    void update(float dt);
-    void render() const;
+    TileManager(float tileWidth, float tileHeight, int rows, int cols,
+                float startMainAxis, float startSecondaryAxis, float constantAxis,
+                float speed, const char *texturePath);
+    virtual void load();
+    virtual void update(float dt);
+    virtual void render() const;
     bool getTile(int row, int col) const;
-    bool isHole(float x, float z) const;
 
     const float SPEED;
 
-private:
-    GLTexture texture;
-    std::vector<std::vector<bool>> groundMap;
+protected:
+    virtual void updateMap() {}
+    virtual void renderTile(float mainAxis, float secondaryAxis) const = 0;
+    virtual void renderHole(float mainAxis, float secondaryAxis) const = 0;
 
-private:
+protected:
+    GLTexture texture;
+    std::vector<std::vector<bool>> tileMap;
+
+protected:
     float tileWidth;
     float tileHeight;
     int rows;
     int cols;
-    float startX;
-    float startZ;
+    float startMainAxis;
+    float startSecondaryAxis;
+    float constantAxis;
 
-private:
-    const float START_X;
-    const float START_Z;
-
-private:
-    void generateRow();
-    void renderTile(float x, float z) const;
+protected:
+    const float START_MAIN_AXIS;
+    const float START_SECONDARY_AXIS;
+    const char *TEXTURE_PATH;
 };

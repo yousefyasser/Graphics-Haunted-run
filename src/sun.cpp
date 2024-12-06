@@ -3,7 +3,7 @@
 #include "include/sun.h"
 #include "include/util.h"
 
-Sun::Sun(GLenum light, float positionX, float positionY, float positionZ)
+Sun::Sun(GLenum light, float positionX, float positionY, float positionZ): INITIAL_POSITION({positionX, positionY, positionZ})
 {
     this->angle = 0.0f;
     this->light = light;
@@ -38,8 +38,8 @@ void Sun::update(float dt)
 {
     angle += dt;
 
-    position[0] = 10.0f * cos(angle);
-    position[1] = 10.0f * sin(angle);
+    position[0] = INITIAL_POSITION[0] * cos(angle);
+    position[1] = INITIAL_POSITION[1] * sin(angle);
 
     float intensity = (sin(angle) + 1.0f) / 2.0f;
     ambient = {intensity, intensity, intensity, 1.0f};

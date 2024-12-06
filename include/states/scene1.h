@@ -2,8 +2,9 @@
 #include "../camera.h"
 #include "../sun.h"
 #include "../player.h"
-#include "../tilemanager.h"
 #include "../spawnables/spawnableManager.h"
+#include "../groundmanager.h"
+#include "../wallmanager.h"
 
 #include <glut.h>
 
@@ -34,7 +35,6 @@ public:
     Camera camera;
     Sun sun;
     Player player;
-    TileManager tileManager;
     SpawnableManager spawnableManager;
 
     Model_3DS enemyModel;
@@ -42,4 +42,7 @@ public:
 
     std::vector<std::unique_ptr<Spawnable>> enemies;
     std::vector<std::unique_ptr<Spawnable>> collectables;
+    GroundManager groundManager;
+    WallManager wallManagerLeft;
+    WallManager wallManagerRight;
 };
