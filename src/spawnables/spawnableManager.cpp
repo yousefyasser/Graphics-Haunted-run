@@ -36,8 +36,10 @@ void SpawnableManager::render(const std::vector<std::unique_ptr<Spawnable>> &spa
 
 void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables, bool isEnemy, const Model_3DS &model, float groundSpeed)
 {
+    spawn_position_x = static_cast<float>(rand()) / RAND_MAX * 30 - 15;
+
     if(collectable_last_spawned_at >= COLLECTABLE_SPAWN_RATE && !isEnemy){
-        Vector3f pos(0, 3, 100), vel(0, 0, -groundSpeed), angle(0, 0, 0);
+        Vector3f pos(spawn_position_x, 2, 100), vel(0, 0, -groundSpeed), angle(0, 0, 0);
 
         auto newCollectable = std::make_unique<Collectable>(pos, vel, angle);
         newCollectable->setModel(model);
@@ -45,7 +47,7 @@ void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables
 
         collectable_last_spawned_at = 0;
     }else if(enemy_last_spawned_at >= ENEMY_SPAWN_RATE && isEnemy){
-        Vector3f pos(1, 3, 100), vel(0, 0, -groundSpeed), angle(0, 90, 0);
+        Vector3f pos(spawn_position_x, 2, 100), vel(0, 0, -groundSpeed), angle(0, 90, 0);
 
         auto newEnemy = std::make_unique<Enemy>(pos, vel, angle);
         newEnemy->setModel(model);

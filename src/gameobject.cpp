@@ -21,8 +21,8 @@ GameObject::GameObject(const Vector3f &initialPosition,
 BoundingBox GameObject::calculateBoundingBox()
 {
   return BoundingBox(
-      Vector3f(position.x - 1, position.y - 5, position.z - 0.05f),
-      Vector3f(position.x + 1, position.y + 5, position.z + 0.05f));
+      Vector3f(position.x - 1, position.y - 5, position.z - 0.5f),
+      Vector3f(position.x + 1, position.y + 5, position.z + 0.5f));
 }
 
 void GameObject::setModel(const Model_3DS &newModel){

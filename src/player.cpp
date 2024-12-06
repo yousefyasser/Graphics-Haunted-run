@@ -7,8 +7,8 @@ float Player::JUMP_HEIGHT = Player::PLAYER_Y + 5;
 BoundingBox Player::calculateBoundingBox()
 {
   return BoundingBox(
-      Vector3f(position.x - 1, position.y - 5, position.z - 0.05f),
-      Vector3f(position.x + 1, position.y + 5, position.z + 0.05f));
+      Vector3f(position.x - 1, position.y - 5, position.z - 0.5f),
+      Vector3f(position.x + 1, position.y + 5, position.z + 0.5f));
 }
 
 void Player::update(float dt)
@@ -20,7 +20,6 @@ void Player::update(float dt)
     if (position.y < -15) {
       position.y = PLAYER_Y;
       falling = false;
-      startInvincibility();
     }
   }
 
