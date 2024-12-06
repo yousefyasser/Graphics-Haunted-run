@@ -36,6 +36,10 @@ public:
     Player player;
     TileManager tileManager;
     SpawnableManager spawnableManager;
+
+    Model_3DS enemyModel;
+    Model_3DS collectableModel;
+
     std::vector<std::unique_ptr<Spawnable>> enemies;
     std::vector<std::unique_ptr<Spawnable>> collectables;
 };

@@ -17,6 +17,9 @@ void Scene1::enter(const BaseParams &params)
 
     player.load();
     tileManager.load();
+    
+    enemyModel.Load("Models/enemy/enemy.3ds");
+    collectableModel.Load("Models/key/key.3ds");
 }
 
 void Scene1::exit() {}
@@ -27,8 +30,8 @@ void Scene1::update(float dt)
     player.update(dt);
     tileManager.update(dt);
     camera.update(dt, player.position, player.angle);
-    spawnableManager.update(dt, collectables, tileManager.SPEED);
-    spawnableManager.update(dt, enemies, tileManager.SPEED);
+    spawnableManager.update(dt, collectables, enemyModel, collectableModel, tileManager.SPEED);
+    spawnableManager.update(dt, enemies, enemyModel, collectableModel, tileManager.SPEED);
 }
 
 void Scene1::render() const

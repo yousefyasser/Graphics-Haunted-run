@@ -19,6 +19,7 @@ public:
   GameObject(const Vector3f &initialPosition);
   GameObject(const Vector3f &initialPosition, const Vector3f &initialAngle);
   
+  void setModel(const Model_3DS &model);
   void setPosition(const Vector3f &newPosition);
   Vector3f getPosition();
   void print();

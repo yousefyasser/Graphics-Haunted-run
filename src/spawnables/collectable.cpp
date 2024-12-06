@@ -1,8 +1,6 @@
 #include "include/spawnables/collectable.h"
 
-void Collectable::load() {
-    model.Load("Models/key/key.3ds");
-}
+void Collectable::load() {}
 
 void Collectable::update(float dt) {
   Spawnable::update(dt);

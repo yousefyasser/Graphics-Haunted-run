@@ -1,8 +1,6 @@
 #include "include/spawnables/enemy.h"
 
-void Enemy::load() {
-    model.Load("Models/enemy/enemy.3ds");
-}
+void Enemy::load() {}
 
 void Enemy::render() const {
   glPushMatrix();

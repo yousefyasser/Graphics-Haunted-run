@@ -25,6 +25,10 @@ BoundingBox GameObject::calculateBoundingBox()
       Vector3f(position.x + 0.05f, position.y + 0.2f, position.z + 0.05f));
 }
 
+void GameObject::setModel(const Model_3DS &newModel){
+  this->model = newModel;
+}
+
 void GameObject::setPosition(const Vector3f &newPosition)
 {
   this->position = newPosition;
