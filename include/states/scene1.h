@@ -5,6 +5,7 @@
 #include "../spawnables/spawnableManager.h"
 #include "../groundmanager.h"
 #include "../wallmanager.h"
+#include "../FlickeringLights.h"
 
 #include <glut.h>
 
@@ -43,4 +44,7 @@ public:
     GroundManager groundManager;
     WallManager wallManagerLeft;
     WallManager wallManagerRight;
+
+    FlickeringLights fl1;
+    FlickeringLights fl2;
 };
