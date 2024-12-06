@@ -2,6 +2,7 @@
 #include "include/game.h"
 #include "include/util.h"
 #include "include/states/scene1.h"
+#include "include/states/scene2.h"
 
 KeyHandler::KeyHandler(Game &game) : game(game) {}
 
@@ -10,18 +11,15 @@ void KeyHandler::keyDown(unsigned char key, int x, int y)
     Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
     switch (key)
     {
-    case 'm':
-        scene1.keyMode = (scene1.keyMode + 1) % 2;
-        scene1.camera.toggleCameraFreeMode();
-        break;
-    case '1':
-        scene1.camera.toggleCameraMode();
-        break;
-    case 27:
-        exit(0);
-        break;
-    default:
-        break;
+        case 'm':
+            scene1.keyMode = (scene1.keyMode + 1) % 2;
+            scene1.camera.toggleCameraFreeMode();
+            break;
+        case 27:
+            exit(0);
+            break;
+        default:
+            break;
     }
 
     if (scene1.keyMode)
@@ -40,6 +38,15 @@ void KeyHandler::keyUp(unsigned char key, int x, int y)
     if (!scene1.keyMode)
     {
         playerKeyUp(key, x, y);
+    }
+}
+
+void KeyHandler::mouse(int button, int state, int x, int y)
+{
+    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        scene1.camera.toggleCameraMode();
     }
 }
 
@@ -102,6 +109,9 @@ void KeyHandler::playerKeyDown(unsigned char key, int x, int y)
         break;
     case 'd':
         scene1.player.velocity.x = -scene1.player.MAX_SPEED;
+        break;
+    case ' ':
+        scene1.player.jump();
         break;
     }
 }

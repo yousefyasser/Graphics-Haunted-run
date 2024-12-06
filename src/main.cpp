@@ -50,6 +50,13 @@ void myKeyboardUp(unsigned char button, int x, int y)
 	glutPostRedisplay();
 }
 
+void myMouse(int button, int state, int x, int y)
+{
+	game.keyhandler.mouse(button, state, x, y);
+
+	glutPostRedisplay();
+}
+
 void myUpdate(int value)
 {
 	game.update();
@@ -77,6 +84,8 @@ void main(int argc, char **argv)
 
 	glutKeyboardFunc(myKeyboard);
 	glutKeyboardUpFunc(myKeyboardUp);
+
+	glutMouseFunc(myMouse);
 
 	myInit();
 
