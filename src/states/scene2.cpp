@@ -1,6 +1,6 @@
 #include "include/states/scene2.h"
 
-Scene2::Scene2(): Scene(), spawnableManager(true, false) {}
+Scene2::Scene2() : Scene(), spawnableManager(true, false) {}
 
 void Scene2::enter(const BaseParams &params)
 {
@@ -16,9 +16,10 @@ void Scene2::exit() {}
 
 void Scene2::update(float dt)
 {
+    Scene::update(dt);
     spawnableManager.update(dt, enemies, true, enemyModel, groundManager.SPEED);
 
-    if (!player.isFalling() && groundManager.isHole(player.position.x, player.position.z))
+    if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
     }

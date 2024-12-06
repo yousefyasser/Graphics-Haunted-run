@@ -13,6 +13,7 @@ using std::chrono::steady_clock;
 class Game
 {
 public:
+static int i;
     const int WINDOW_WIDTH;
     const int WINDOW_HEIGHT;
     const int FPS;

@@ -1,4 +1,6 @@
+#include <string>
 #include "include/states/scene.h"
+#include "include/util.h"
 
 Scene::Scene()
     : camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f),
@@ -39,8 +41,30 @@ void Scene::update(float dt)
     camera.update(dt, player.position, player.angle);
 }
 
+void Scene::renderScore() const
+{
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, 1280, 0, 720);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    glColor3f(0.0f, 0.0f, 0.0f);
+    util::drawText(500.0f, 720 - 40.0f, 0.0f, "Score: " + std::to_string((int)player.keys * 10));
+
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+}
+
 void Scene::render() const
 {
+    renderScore();
     camera.setup();
     sun.render();
     fl1.render();
