@@ -4,6 +4,7 @@
 #include "include/util.h"
 #include "include/states/scene1.h"
 #include "include/states/scene2.h"
+#include "include/states/gameovermenu.h"
 
 Game::Game()
     : WINDOW_WIDTH(1280), WINDOW_HEIGHT(720), FPS(60), dt(0.0f),
@@ -15,8 +16,13 @@ Game::Game()
            { return std::make_unique<EmptyState>(); }},
           {StateType::Scene1, []() -> std::unique_ptr<BaseState>
            { return std::make_unique<Scene1>(); }},
-          {StateType::Scene2, []() -> std::unique_ptr<BaseState>
-           { return std::make_unique<Scene2>(); }},
+          {
+              StateType::Scene2,
+              []() -> std::unique_ptr<BaseState>
+              { return std::make_unique<Scene2>(); },
+          },
+          {StateType::GameOverMenu, []() -> std::unique_ptr<BaseState>
+           { return std::make_unique<GameOverMenu>(); }},
       })
 {
 }
@@ -48,11 +54,17 @@ void Game::update()
     auto &scene2 = dynamic_cast<Scene2 &>(stateMachine.getCurrentState());
     if (scene2.player.keys == 0)
     {
-      // stateMachine.change(StateType::GameOverMenu, nullptr);
+      stateMachine.change(StateType::GameOverMenu, GameOverMenu::EnterParams{
+                                                       0,
+                                                       int(scene2.COUNTDOWN - scene2.elapsed.count()),
+                                                   });
     }
     else if (scene2.elapsed.count() >= scene2.COUNTDOWN)
     {
-      // stateMachine.change(StateType::GameWinMenu, nullptr);
+      stateMachine.change(StateType::GameOverMenu, GameOverMenu::EnterParams{
+                                                       scene2.player.keys,
+                                                       0,
+                                                   });
     }
   }
 }

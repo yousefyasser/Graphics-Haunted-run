@@ -15,7 +15,6 @@ enum class StateType
     Scene1,
     Scene2,
     GameOverMenu,
-    GameWinMenu,
 };
 
 class StateMachine

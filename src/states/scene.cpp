@@ -51,7 +51,7 @@ void Scene::renderScore() const
     glPushMatrix();
     glLoadIdentity();
 
-    glColor3f(0.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
     util::drawText(500.0f, 720 - 40.0f, 0.0f, "Score: " + std::to_string((int)player.keys * 10));
 
     glPopMatrix();
