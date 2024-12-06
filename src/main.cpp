@@ -89,9 +89,10 @@ void main(int argc, char **argv)
 	soundManager.loadSound("background", "sounds/soundtrack.wav");
 	soundManager.loadSound("key_collect", "sounds/key_collect.mp3");
 	soundManager.loadSound("fall", "sounds/fall.mp3");
+	soundManager.loadSound("scream", "sounds/cartoon_scream.mp3");
 
 	// Play background sound
-	soundManager.setVolume("background", 50.0f);
+	soundManager.setVolume("background", 25.0f);
 	soundManager.playSound("background");
 
 	glutKeyboardFunc(myKeyboard);

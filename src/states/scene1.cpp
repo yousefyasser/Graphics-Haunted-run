@@ -3,7 +3,7 @@
 
 extern SoundManager soundManager;
 
-Scene1::Scene1(): Scene(), spawnableManager(false, true) {}
+Scene1::Scene1() : Scene(), spawnableManager(false, true) {}
 
 void Scene1::enter(const BaseParams &params)
 {
@@ -21,6 +21,7 @@ void Scene1::update(float dt)
     if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
+        soundManager.playSound("fall");
     }
 
     if (!player.isInvincible())

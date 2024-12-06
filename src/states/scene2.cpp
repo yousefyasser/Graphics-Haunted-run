@@ -1,4 +1,7 @@
 #include "include/states/scene2.h"
+#include "SoundManager.h"
+
+extern SoundManager soundManager;
 
 Scene2::Scene2() : Scene(), spawnableManager(true, false) {}
 
@@ -22,12 +25,13 @@ void Scene2::update(float dt)
     if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
+        soundManager.playSound("fall");
     }
 
     int pos = spawnableManager.isColliding(player, enemies);
     if (pos == -1)
         return;
-
+    soundManager.playSound("scream");
     player.keys--;
     player.startInvincibility();
     spawnableManager.removeColliding(pos, enemies);
