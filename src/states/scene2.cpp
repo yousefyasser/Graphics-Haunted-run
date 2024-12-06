@@ -24,6 +24,7 @@ void Scene2::update(float dt)
     if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
+        player.startInvincibility();
         player.keys--;
     }
 

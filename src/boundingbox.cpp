@@ -1,5 +1,8 @@
 #include "include/boundingbox.h"
 
+#include <iostream>
+#include <glut.h>
+
 BoundingBox::BoundingBox() {}
 
 BoundingBox::BoundingBox(const Vector3f &minPoint, const Vector3f &maxPoint) {
@@ -8,9 +11,12 @@ BoundingBox::BoundingBox(const Vector3f &minPoint, const Vector3f &maxPoint) {
 }
 
 bool BoundingBox::intersects(const BoundingBox &other) const {
-  return (min.x <= other.max.x && max.x >= other.min.x) &&
+
+  bool ret = (min.x <= other.max.x && max.x >= other.min.x) &&
           (min.y <= other.max.y && max.y >= other.min.y) &&
           (min.z <= other.max.z && max.z >= other.min.z);
+
+  return ret;
 }
 
 void BoundingBox::expandBy(float x, float y, float z) {
@@ -20,6 +26,30 @@ void BoundingBox::expandBy(float x, float y, float z) {
   max.x += x;
   max.y += y;
   max.z += z;
+}
+
+void BoundingBox::render() const {
+  glBegin(GL_LINES);
+
+  // Draw lines for the edges of the bounding box
+  glVertex3f(min.x, min.y, min.z); glVertex3f(max.x, min.y, min.z);
+  glVertex3f(min.x, min.y, min.z); glVertex3f(min.x, max.y, min.z);
+  glVertex3f(min.x, min.y, min.z); glVertex3f(min.x, min.y, max.z);
+
+  glVertex3f(max.x, max.y, max.z); glVertex3f(min.x, max.y, max.z);
+  glVertex3f(max.x, max.y, max.z); glVertex3f(max.x, min.y, max.z);
+  glVertex3f(max.x, max.y, max.z); glVertex3f(max.x, max.y, min.z);
+
+  glVertex3f(min.x, max.y, min.z); glVertex3f(max.x, max.y, min.z);
+  glVertex3f(min.x, max.y, min.z); glVertex3f(min.x, max.y, max.z);
+
+  glVertex3f(max.x, min.y, min.z); glVertex3f(max.x, max.y, min.z);
+  glVertex3f(max.x, min.y, min.z); glVertex3f(max.x, min.y, max.z);
+
+  glVertex3f(min.x, min.y, max.z); glVertex3f(max.x, min.y, max.z);
+  glVertex3f(min.x, min.y, max.z); glVertex3f(min.x, max.y, max.z);
+
+  glEnd();
 }
 
 void BoundingBox::print() {
