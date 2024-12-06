@@ -43,6 +43,18 @@ void Game::update()
                                              });
     }
   }
+  else if (stateMachine.getCurrentStateType() == StateType::Scene2)
+  {
+    auto &scene2 = dynamic_cast<Scene2 &>(stateMachine.getCurrentState());
+    if (scene2.player.keys == 0)
+    {
+      // stateMachine.change(StateType::GameOverMenu, nullptr);
+    }
+    else if (scene2.elapsed.count() >= scene2.COUNTDOWN)
+    {
+      // stateMachine.change(StateType::GameWinMenu, nullptr);
+    }
+  }
 }
 
 void Game::render() const
@@ -52,11 +64,11 @@ void Game::render() const
 
 void Game::start()
 {
-  stateMachine.change(StateType::Scene1, Scene1::EnterParams{
-                                              FOVY,
-                                              ASPECT_RATIO,
-                                              ZNEAR,
-                                              ZFAR,
+  stateMachine.change(StateType::Scene2, Scene2::EnterParams{
+                                             FOVY,
+                                             ASPECT_RATIO,
+                                             ZNEAR,
+                                             ZFAR,
                                          });
   lastTime = std::chrono::high_resolution_clock::now();
 }
