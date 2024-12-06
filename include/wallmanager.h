@@ -1,3 +1,5 @@
+#pragma once
+
 #include "tilemanager.h"
 
 class WallManager : public TileManager
