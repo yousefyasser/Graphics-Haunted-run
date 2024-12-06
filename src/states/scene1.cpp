@@ -18,7 +18,7 @@ void Scene1::update(float dt)
     Scene::update(dt);
     spawnableManager.update(dt, collectables, false, collectableModel, groundManager.SPEED);
 
-    if (!player.isFalling() && groundManager.isHole(player.position.x, player.position.z))
+    if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
     }
@@ -29,6 +29,7 @@ void Scene1::update(float dt)
         if (index == -1)
             return;
 
+        player.startInvincibility();
         soundManager.playSound("key_collect");
         player.keys++;
         spawnableManager.removeColliding(index, collectables);

@@ -141,13 +141,19 @@ void KeyHandler::playerKeyDown(unsigned char key, int x, int y)
             if (scene.player.position.x < scene.wallManagerLeft.getConstantAxis() - 5.0f)
                 scene.player.velocity.x = scene.player.MAX_SPEED;
             else
-                scene.player.velocity.x = 0;
+            {
+                scene.player.position.x = 0;
+                scene.player.position.x = scene.wallManagerLeft.getConstantAxis() - 5.0f;
+            }
             break;
         case 'd':
             if (scene.player.position.x > scene.wallManagerRight.getConstantAxis() + 5.0f)
                 scene.player.velocity.x = -scene.player.MAX_SPEED;
             else
-                scene.player.velocity.x = 0;
+            {
+                scene.player.position.x = 0;
+                scene.player.position.x = scene.wallManagerRight.getConstantAxis() + 5.0f;
+            }
             break;
         case ' ':
             scene.player.jump();

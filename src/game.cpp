@@ -8,7 +8,7 @@
 Game::Game()
     : WINDOW_WIDTH(1280), WINDOW_HEIGHT(720), FPS(60), dt(0.0f),
       ASPECT_RATIO((GLdouble)WINDOW_WIDTH / (GLdouble)WINDOW_HEIGHT),
-      FOVY(45.0), ZNEAR(0.1), ZFAR(1000),
+      FOVY(45.0), ZNEAR(0.1), ZFAR(100),
       keyhandler(*this),
       stateMachine({
           {StateType::Empty, []() -> std::unique_ptr<BaseState>

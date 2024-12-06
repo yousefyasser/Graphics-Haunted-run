@@ -43,4 +43,7 @@ public:
 
     FlickeringLights fl1;
     FlickeringLights fl2;
+
+protected:
+    void renderScore() const;
 };
