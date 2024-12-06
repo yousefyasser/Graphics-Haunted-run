@@ -18,6 +18,9 @@ void Scene1::enter(const BaseParams &params)
     camera.zFar = p.zFar;
 
     player.load();
+
+    enemyModel.Load("Models/enemy/enemy.3ds");
+    collectableModel.Load("Models/key/key.3ds");
     groundManager.load();
     wallManagerLeft.load();
     wallManagerRight.load();
@@ -33,6 +36,8 @@ void Scene1::update(float dt)
     wallManagerLeft.update(dt);
     wallManagerRight.update(dt);
     camera.update(dt, player.position, player.angle);
+    spawnableManager.update(dt, collectables, enemyModel, collectableModel, groundManager.SPEED);
+    spawnableManager.update(dt, enemies, enemyModel, collectableModel, groundManager.SPEED);
 }
 
 void Scene1::render() const
@@ -40,6 +45,8 @@ void Scene1::render() const
     camera.setup();
     sun.render();
     player.render();
+    spawnableManager.render(collectables);
+    spawnableManager.render(enemies);
     groundManager.render();
     wallManagerLeft.render();
     wallManagerRight.render();

@@ -3,14 +3,31 @@
 GameObject::GameObject() {}
 
 GameObject::GameObject(const Vector3f &initialPosition, const Vector3f &initialVelocity, const Vector3f &initialAngle)
-    : position(initialPosition), velocity(initialVelocity), angle(initialAngle) {}
+    : position(initialPosition), velocity(initialVelocity), angle(initialAngle) {
+      boundingBox = calculateBoundingBox();
+    }
 
 GameObject::GameObject(const Vector3f &initialPosition)
-    : position(initialPosition) {}
+    : position(initialPosition) {
+      boundingBox = calculateBoundingBox();
+    }
 
 GameObject::GameObject(const Vector3f &initialPosition,
                        const Vector3f &initialAngle)
-    : position(initialPosition), angle(initialAngle) {}
+    : position(initialPosition), angle(initialAngle) {
+      boundingBox = calculateBoundingBox();
+    }
+
+BoundingBox GameObject::calculateBoundingBox()
+{
+  return BoundingBox(
+      Vector3f(position.x - 0.05f, position.y, position.z - 0.05f),
+      Vector3f(position.x + 0.05f, position.y + 0.2f, position.z + 0.05f));
+}
+
+void GameObject::setModel(const Model_3DS &newModel){
+  this->model = newModel;
+}
 
 void GameObject::setPosition(const Vector3f &newPosition)
 {
