@@ -16,6 +16,7 @@ void myInit(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
+	util::setupLights();
 	util::setupMaterials();
 
 	game.start();
