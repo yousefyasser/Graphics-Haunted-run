@@ -87,3 +87,8 @@ void util::drawText(float x, float y, std::string text)
 {
 	util::drawText(x, y, text.c_str());
 }
+
+template<typename Base, typename T>
+inline bool util::instanceof(const T *ptr) {
+   return dynamic_cast<const Base*>(ptr) != nullptr;
+}

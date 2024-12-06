@@ -12,4 +12,5 @@ public:
 
 private:
     void renderTile(float z, float y) const override;
+    void renderHole(float z, float y) const override;
 };

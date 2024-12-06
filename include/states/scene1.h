@@ -35,5 +35,6 @@ public:
     Sun sun;
     Player player;
     GroundManager groundManager;
-    WallManager wallManager;
+    WallManager wallManagerLeft;
+    WallManager wallManagerRight;
 };

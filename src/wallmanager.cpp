@@ -30,3 +30,5 @@ void WallManager::renderTile(float z, float y) const
 
 	glColor3f(1, 1, 1);
 }
+
+void WallManager::renderHole(float z, float y) const {}

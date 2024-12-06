@@ -12,6 +12,7 @@ private:
     std::array<GLfloat, 4> diffuse;
     std::array<GLfloat, 4> specular;
     std::array<GLfloat, 4> position;
+    const std::array<GLfloat, 3> INITIAL_POSITION;
 
 public:
     Sun(GLenum light,

@@ -2,10 +2,11 @@
 
 Scene1::Scene1()
     : camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f),
-      sun(GL_LIGHT1),
+      sun(GL_LIGHT1, 50.0f, 50.0f, 50.0f),
       player(Vector3f(0, 5, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0)),
-      groundManager(15, 10, 20, 3, -15, -22.5f, 0.0f, 10.0f, "Textures/ground.bmp"),
-      wallManager(20, 30, 20, 3, -15, -22.5f, 5.0f, 10.0f, "Textures/wall.bmp"),
+      groundManager(15, 10, 30, 3, -15.0f, -22.5f, 0.0f, 10.0f, "Textures/ground.bmp"),
+      wallManagerLeft(10, 30, 10, 3, -15.0f, 0.0f, 22.0f, 10.0f, "Textures/wall.bmp"),
+      wallManagerRight(10, 30, 10, 3, -15.0f, 0.0f, -22.5f, 10.0f, "Textures/wall.bmp"),
       keyMode(0) {}
 
 void Scene1::enter(const BaseParams &params)
@@ -18,7 +19,8 @@ void Scene1::enter(const BaseParams &params)
 
     player.load();
     groundManager.load();
-    wallManager.load();
+    wallManagerLeft.load();
+    wallManagerRight.load();
 }
 
 void Scene1::exit() {}
@@ -28,7 +30,8 @@ void Scene1::update(float dt)
     sun.update(dt);
     player.update(dt);
     groundManager.update(dt);
-    wallManager.update(dt);
+    wallManagerLeft.update(dt);
+    wallManagerRight.update(dt);
     camera.update(dt, player.position, player.angle);
 }
 
@@ -38,5 +41,6 @@ void Scene1::render() const
     sun.render();
     player.render();
     groundManager.render();
-    wallManager.render();
+    wallManagerLeft.render();
+    wallManagerRight.render();
 }

@@ -17,6 +17,7 @@ public:
 protected:
     virtual void updateMap() {}
     virtual void renderTile(float mainAxis, float secondaryAxis) const = 0;
+    virtual void renderHole(float mainAxis, float secondaryAxis) const = 0;
 
 protected:
     GLTexture texture;

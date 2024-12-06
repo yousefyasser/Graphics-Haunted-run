@@ -26,6 +26,8 @@ void TileManager::render() const
 			if (tile)
 			{
 				renderTile(mainAxis, secondaryAxis);
+			} else {
+				renderHole(mainAxis, secondaryAxis);
 			}
 			secondaryAxis += tileWidth;
 		}

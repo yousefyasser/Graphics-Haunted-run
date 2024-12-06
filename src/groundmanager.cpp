@@ -42,6 +42,28 @@ void GroundManager::renderTile(float z, float x) const
 	glColor3f(1, 1, 1);
 }
 
+void GroundManager::renderHole(float z, float x) const
+{
+	glDisable(GL_LIGHTING);
+
+	glColor3f(0.0, 0.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(0, constantAxis, 0);
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);
+	glVertex3f(x, 0, z);
+	glVertex3f(x + tileWidth, 0, z);
+	glVertex3f(x + tileWidth, 0, z + tileHeight);
+	glVertex3f(x, 0, z + tileHeight);
+	glEnd();
+	glPopMatrix();
+
+	glEnable(GL_LIGHTING);
+
+	glColor3f(1, 1, 1);
+}
+
 bool GroundManager::isHole(float x, float z) const
 {
 	int col = (x - startSecondaryAxis) / tileWidth;
