@@ -1,4 +1,5 @@
 #include "include/spawnables/spawnableManager.h"
+#include "include/collisionmanager.h"
 
 SpawnableManager::SpawnableManager(bool enemies, bool collectables) : enemies(enemies), collectables(collectables) {}
 
@@ -52,4 +53,18 @@ void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables
 
         enemy_last_spawned_at = 0;
     }
+}
+
+int SpawnableManager::isColliding(Player &player, const std::vector<std::unique_ptr<Spawnable>> &spawnables) {
+    for(int i = 0; i < spawnables.size(); i++){
+        if (CollisionManager::checkCollision(player, *spawnables[i])) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void SpawnableManager::removeColliding(int index, std::vector<std::unique_ptr<Spawnable>> &spawnables){
+    spawnables.erase(spawnables.begin() + index);
 }

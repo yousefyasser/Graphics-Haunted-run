@@ -14,12 +14,13 @@ public:
 public:
   using GameObject::GameObject;
   
+  BoundingBox calculateBoundingBox() override;
   void update(float dt) override;
   void render() const override;
   void load() override;
 
 public:
-  int keys;
+  int keys = 0;
   void startFalling();
   bool isFalling() const;
   bool isInvincible() const;

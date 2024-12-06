@@ -5,5 +5,5 @@
 class CollisionManager
 {
 public:
-  static bool checkCollision(const GameObject &obj1, const GameObject &obj2);
+  static bool checkCollision(GameObject &obj1, GameObject &obj2);
 };

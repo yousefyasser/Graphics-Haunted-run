@@ -2,6 +2,13 @@
 
 float Player::PLAYER_Y = 5;
 
+BoundingBox Player::calculateBoundingBox()
+{
+  return BoundingBox(
+      Vector3f(position.x - 1, position.y - 5, position.z - 0.05f),
+      Vector3f(position.x + 1, position.y + 5, position.z + 0.05f));
+}
+
 void Player::update(float dt)
 {
   position += velocity;

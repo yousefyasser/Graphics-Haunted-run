@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../util.h"
+#include "../player.h"
 #include "enemy.h"
 #include "collectable.h"
 #include <vector>
@@ -22,6 +23,8 @@ class SpawnableManager {
 
     void update(float dt, std::vector<std::unique_ptr<Spawnable>> &collectables, bool isEnemy, const Model_3DS &model, float groundSpeed);
     void render(const std::vector<std::unique_ptr<Spawnable>> &spawnables) const;
+    int isColliding(Player &player, const std::vector<std::unique_ptr<Spawnable>> &spawnables);
+    void removeColliding(int index, std::vector<std::unique_ptr<Spawnable>> &spawnables);
 
   private:
     void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &collectables, bool isEnemy, const Model_3DS &model, float groundSpeed);

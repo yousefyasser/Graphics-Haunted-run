@@ -1,6 +1,8 @@
 #include "include/collisionmanager.h"
 
-bool CollisionManager::checkCollision(const GameObject &obj1, const GameObject &obj2)
+bool CollisionManager::checkCollision(GameObject &obj1, GameObject &obj2)
 {
+  obj1.boundingBox = obj1.calculateBoundingBox();
+  obj2.boundingBox = obj2.calculateBoundingBox();
   return obj1.checkCollision(obj2);
 }
