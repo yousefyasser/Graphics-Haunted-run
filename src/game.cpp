@@ -62,7 +62,7 @@ void Game::update()
     else if (scene2.elapsed.count() >= scene2.COUNTDOWN)
     {
       stateMachine.change(StateType::GameOverMenu, GameOverMenu::EnterParams{
-                                                       scene2.player.keys,
+                                                       scene2.player.keys * 10,
                                                        0,
                                                    });
     }

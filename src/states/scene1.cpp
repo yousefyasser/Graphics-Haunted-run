@@ -30,7 +30,6 @@ void Scene1::update(float dt)
         if (index == -1)
             return;
 
-        player.startInvincibility();
         soundManager.playSound("key_collect");
         player.keys++;
         spawnableManager.removeColliding(index, collectables);
