@@ -14,6 +14,7 @@ BoundingBox Player::calculateBoundingBox()
 void Player::update(float dt)
 {
   position += velocity;
+
   if (falling && !jumping) {
     position.y -= MAX_SPEED;
     if (position.y < -15) {

@@ -27,14 +27,16 @@ void GameOverMenu::render() const
     glPushMatrix();
     glLoadIdentity();
 
+    glDisable(GL_LIGHTING);
+
     if (score <= 0)
     {
-        glColor3f(1.0f, 0.0f, 0.0f);
+        glColor3f(6.0f, 0.0f, 0.0f);
         util::drawText(500.0f, 720 - 200.0f, 0.0f, "Game Over!, Time Remaining: " + std::to_string(timeRemaining));
     }
     else
     {
-        glColor3f(0.0f, 1.0f, 0.0f);
+        glColor3f(0.0f, 6.0f, 0.0f);
         util::drawText(500.0f, 720 - 200.0f, 0.0f, "You Win!, Score: " + std::to_string(score));
     }
 
@@ -43,5 +45,6 @@ void GameOverMenu::render() const
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
 
+    glEnable(GL_LIGHTING);
     glColor3f(1.0f, 1.0f, 1.0f);
 }

@@ -8,6 +8,12 @@ KeyHandler::KeyHandler(Game &game) : game(game) {}
 
 void KeyHandler::keyDown(unsigned char key, int x, int y)
 {
+    if (key == 27)
+    {
+        exit(0);
+        return;
+    }
+
     switch (game.stateMachine.getCurrentStateType())
     {
     case StateType::Scene1:
@@ -19,9 +25,6 @@ void KeyHandler::keyDown(unsigned char key, int x, int y)
         case 'm':
             scene.keyMode = (scene.keyMode + 1) % 2;
             scene.camera.toggleCameraFreeMode();
-            break;
-        case 27:
-            exit(0);
             break;
         default:
             break;

@@ -34,7 +34,20 @@ void Scene::update(float dt)
     sun.update(dt);
     fl1.update(dt);
     fl2.update(dt);
+
     player.update(dt);
+    if (player.position.x < wallManagerRight.getConstantAxis() + 5.0f)
+    {
+        player.position.x = wallManagerRight.getConstantAxis() + 5.0f;
+        player.velocity.x = 0;
+    }
+
+    else if (player.position.x > wallManagerLeft.getConstantAxis() - 5.0f)
+    {
+        player.position.x = wallManagerLeft.getConstantAxis() - 5.0f;
+        player.velocity.x = 0;
+    }
+
     groundManager.update(dt);
     wallManagerLeft.update(dt);
     wallManagerRight.update(dt);
@@ -51,7 +64,8 @@ void Scene::renderScore() const
     glPushMatrix();
     glLoadIdentity();
 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glDisable(GL_LIGHTING);
+    glColor3f(6.0f, 6.0f, 6.0f);
     util::drawText(500.0f, 720 - 40.0f, 0.0f, "Score: " + std::to_string((int)player.keys * 10));
 
     glPopMatrix();
@@ -59,6 +73,7 @@ void Scene::renderScore() const
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
 
+    glEnable(GL_LIGHTING);
     glColor3f(1.0f, 1.0f, 1.0f);
 }
 

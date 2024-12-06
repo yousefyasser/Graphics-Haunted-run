@@ -8,7 +8,7 @@ void Scene2::enter(const BaseParams &params)
 
     Scene::enter(params);
 
-    player.keys = 1;
+    player.keys = 7;
     enemyModel.Load("Models/enemy/enemy.3ds");
     start = std::chrono::high_resolution_clock::now();
 }
@@ -53,7 +53,8 @@ void Scene2::renderTime() const
     glPushMatrix();
     glLoadIdentity();
 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    glDisable(GL_LIGHTING);
+    glColor3f(6.0f, 6.0f, 6.0f);
     util::drawText(700.0f, 720 - 40.0f, 0.0f, "Time: " + std::to_string(int(COUNTDOWN - elapsed.count())));
 
     glPopMatrix();
@@ -61,5 +62,6 @@ void Scene2::renderTime() const
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
 
+    glEnable(GL_LIGHTING);
     glColor3f(1.0f, 1.0f, 1.0f);
 }
