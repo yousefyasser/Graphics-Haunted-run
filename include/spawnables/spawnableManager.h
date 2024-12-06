@@ -11,10 +11,12 @@
 class SpawnableManager {
   public:
     const float ENEMY_SPAWN_RATE = 10.0f;
-    const float COLLECTABLE_SPAWN_RATE = 5.0f;
+    const float COLLECTABLE_SPAWN_RATE = 2.0f;
 
     float enemy_last_spawned_at = 0.0f;
     float collectable_last_spawned_at = 0.0f;
+
+    float spawn_position_x = 0.0f;
 
     bool enemies, collectables;
 
