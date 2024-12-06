@@ -13,6 +13,7 @@ void Scene2::enter(const BaseParams &params)
 
     player.keys = 7;
     enemyModel.Load("Models/enemy/enemy.3ds");
+    start = std::chrono::high_resolution_clock::now();
 }
 
 void Scene2::exit() {}
@@ -20,11 +21,13 @@ void Scene2::exit() {}
 void Scene2::update(float dt)
 {
     Scene::update(dt);
+    elapsed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - start);
     spawnableManager.update(dt, enemies, true, enemyModel, groundManager.SPEED);
 
     if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
         player.startFalling();
+        player.keys--;
         soundManager.playSound("fall");
     }
 
@@ -40,5 +43,29 @@ void Scene2::update(float dt)
 void Scene2::render() const
 {
     Scene::render();
+    renderTime();
     spawnableManager.render(enemies);
+}
+
+void Scene2::renderTime() const
+{
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, 1280, 0, 720);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    glDisable(GL_LIGHTING);
+    glColor3f(6.0f, 6.0f, 6.0f);
+    util::drawText(700.0f, 720 - 40.0f, 0.0f, "Time: " + std::to_string(int(COUNTDOWN - elapsed.count())));
+
+    glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+
+    glEnable(GL_LIGHTING);
+    glColor3f(1.0f, 1.0f, 1.0f);
 }
