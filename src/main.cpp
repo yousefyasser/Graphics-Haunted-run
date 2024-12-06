@@ -65,7 +65,7 @@ void main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA | GLUT_DEPTH);
 
 	glutInitWindowSize(game.WINDOW_WIDTH, game.WINDOW_HEIGHT);
 

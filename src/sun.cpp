@@ -38,6 +38,9 @@ void Sun::update(float dt)
 {
     angle += dt;
 
+    if (angle > 3.14)
+        angle = 0;
+
     position[0] = INITIAL_POSITION[0] * cos(angle);
     position[1] = INITIAL_POSITION[1] * sin(angle);
 

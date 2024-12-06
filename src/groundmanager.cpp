@@ -3,12 +3,17 @@
 
 void GroundManager::updateMap()
 {
+	toggleUpdateMap = !toggleUpdateMap;
+
 	tileMap.erase(tileMap.begin());
 	tileMap.emplace_back(cols, true);
+
+	if (toggleUpdateMap) return;
+
 	if (rand() % 100 < 90)
 	{
 		int hole = rand() % cols;
-		tileMap[rows - 1][hole] = false;
+		tileMap[rows - 2][hole] = false;
 	}
 }
 

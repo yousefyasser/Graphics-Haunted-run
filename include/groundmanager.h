@@ -10,7 +10,6 @@ class GroundManager : public TileManager
 public:
     using TileManager::TileManager;
     using TileManager::load;
-    using TileManager::update;
     using TileManager::render;
     using TileManager::getTile;
 
@@ -18,8 +17,9 @@ public:
 
 private:
     void updateMap() override;
-
-private:
     void renderTile(float z, float x) const override;
     void renderHole(float z, float x) const override;
+
+private:
+    bool toggleUpdateMap;
 };
