@@ -8,51 +8,80 @@ KeyHandler::KeyHandler(Game &game) : game(game) {}
 
 void KeyHandler::keyDown(unsigned char key, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    switch (key)
+    switch (game.stateMachine.getCurrentStateType())
     {
+    case StateType::Scene1:
+    case StateType::Scene2:
+
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        switch (key)
+        {
         case 'm':
-            scene1.keyMode = (scene1.keyMode + 1) % 2;
-            scene1.camera.toggleCameraFreeMode();
+            scene.keyMode = (scene.keyMode + 1) % 2;
+            scene.camera.toggleCameraFreeMode();
             break;
         case 27:
             exit(0);
             break;
         default:
             break;
-    }
+        }
 
-    if (scene1.keyMode)
-    {
-        cameraKeyDown(key, x, y);
-    }
-    else
-    {
-        playerKeyDown(key, x, y);
+        if (scene.keyMode)
+        {
+            cameraKeyDown(key, x, y);
+        }
+        else
+        {
+            playerKeyDown(key, x, y);
+        }
+        break;
     }
 }
 
 void KeyHandler::keyUp(unsigned char key, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    if (!scene1.keyMode)
+    switch (game.stateMachine.getCurrentStateType())
     {
-        playerKeyUp(key, x, y);
+    case StateType::Scene1:
+    case StateType::Scene2:
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        if (!scene.keyMode)
+        {
+            playerKeyUp(key, x, y);
+        }
+        break;
     }
 }
 
 void KeyHandler::mouse(int button, int state, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    switch (game.stateMachine.getCurrentStateType())
     {
-        scene1.camera.toggleCameraMode();
+    case StateType::Scene1:
+    case StateType::Scene2:
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            scene.camera.toggleCameraMode();
+        }
+        break;
     }
 }
 
 void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
+    Camera *camera = nullptr;
+    switch (game.stateMachine.getCurrentStateType())
+    {
+    case StateType::Scene1:
+    case StateType::Scene2:
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        camera = &scene.camera;
+    }
+
+    if (camera == nullptr)
+        return;
 
     const float d = 1.5f;
     const float a = 1.0f;
@@ -60,70 +89,83 @@ void KeyHandler::cameraKeyDown(unsigned char key, int x, int y)
     switch (key)
     {
     case 'w':
-        scene1.camera.moveY(d);
+        camera->moveY(d);
         break;
     case 's':
-        scene1.camera.moveY(-d);
+        camera->moveY(-d);
         break;
     case 'd':
-        scene1.camera.moveX(-d);
+        camera->moveX(-d);
         break;
     case 'a':
-        scene1.camera.moveX(d);
+        camera->moveX(d);
         break;
     case 'q':
-        scene1.camera.moveZ(d);
+        camera->moveZ(d);
         break;
     case 'e':
-        scene1.camera.moveZ(-d);
+        camera->moveZ(-d);
         break;
 
     case 'i':
-        scene1.camera.rotateX(a);
+        camera->rotateX(a);
         break;
     case 'k':
-        scene1.camera.rotateX(-a);
+        camera->rotateX(-a);
         break;
     case 'l':
-        scene1.camera.rotateY(-a);
+        camera->rotateY(-a);
         break;
     case 'j':
-        scene1.camera.rotateY(a);
+        camera->rotateY(a);
         break;
     case 'u':
-        scene1.camera.rotateZ(a);
+        camera->rotateZ(a);
         break;
     case 'o':
-        scene1.camera.rotateZ(-a);
+        camera->rotateZ(-a);
         break;
     }
 }
 
 void KeyHandler::playerKeyDown(unsigned char key, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    switch (key)
+    switch (game.stateMachine.getCurrentStateType())
     {
-    case 'a':
-        scene1.player.velocity.x = scene1.player.MAX_SPEED;
-        break;
-    case 'd':
-        scene1.player.velocity.x = -scene1.player.MAX_SPEED;
-        break;
-    case ' ':
-        scene1.player.jump();
+    case StateType::Scene1:
+    case StateType::Scene2:
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        switch (key)
+        {
+        case 'a':
+            scene.player.velocity.x = scene.player.MAX_SPEED;
+            break;
+        case 'd':
+            scene.player.velocity.x = -scene.player.MAX_SPEED;
+            break;
+        case ' ':
+            scene.player.jump();
+            break;
+        }
         break;
     }
 }
 
 void KeyHandler::playerKeyUp(unsigned char key, int x, int y)
 {
-    Scene1 &scene1 = dynamic_cast<Scene1 &>(game.stateMachine.getCurrentState());
-    switch (key)
+
+    switch (game.stateMachine.getCurrentStateType())
     {
-    case 'a':
-    case 'd':
-        scene1.player.velocity.x = 0;
+    case StateType::Scene1:
+    case StateType::Scene2:
+        Scene &scene = dynamic_cast<Scene &>(game.stateMachine.getCurrentState());
+        switch (key)
+        {
+        case 'a':
+        case 'd':
+            scene.player.velocity.x = 0;
+            break;
+        }
         break;
     }
 }
