@@ -3,8 +3,6 @@
 
 void WallManager::renderTile(float z, float y) const
 {
-	glDisable(GL_LIGHTING);
-
 	glColor3f(0.627, 0.125, 0.941);
 
 	glEnable(GL_TEXTURE_2D);
@@ -25,8 +23,6 @@ void WallManager::renderTile(float z, float y) const
 	glVertex3f(0, y, z + tileHeight);
 	glEnd();
 	glPopMatrix();
-
-	glEnable(GL_LIGHTING);
 
 	glColor3f(1, 1, 1);
 }

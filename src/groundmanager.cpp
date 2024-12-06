@@ -19,8 +19,6 @@ void GroundManager::updateMap()
 
 void GroundManager::renderTile(float z, float x) const
 {
-	glDisable(GL_LIGHTING);
-
 	glColor3f(0.6, 0.6, 0.6);
 
 	glEnable(GL_TEXTURE_2D);
@@ -41,8 +39,6 @@ void GroundManager::renderTile(float z, float x) const
 	glVertex3f(x, 0, z + tileHeight);
 	glEnd();
 	glPopMatrix();
-
-	glEnable(GL_LIGHTING);
 
 	glColor3f(1, 1, 1);
 }

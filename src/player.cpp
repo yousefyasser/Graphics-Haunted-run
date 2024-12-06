@@ -1,6 +1,8 @@
 #include "include/player.h"
 
 float Player::PLAYER_Y = 5;
+float Player::JUMP_SPEED = 0.2f;
+float Player::JUMP_HEIGHT = Player::PLAYER_Y + 5;
 
 BoundingBox Player::calculateBoundingBox()
 {
@@ -12,13 +14,23 @@ BoundingBox Player::calculateBoundingBox()
 void Player::update(float dt)
 {
   position += velocity;
-  if (falling) {
+  if (falling && !jumping) {
     position.y -= MAX_SPEED;
     if (position.y < -15) {
       position.y = PLAYER_Y;
       falling = false;
       invincible = true;
       invincibilityTimer = std::chrono::high_resolution_clock::now();
+    }
+  }
+
+  if(jumping){
+    if(position.y >= JUMP_HEIGHT) {
+      velocity.y = -JUMP_SPEED;
+    }else if(position.y <= PLAYER_Y){
+      position.y = PLAYER_Y;
+      velocity.y = 0;
+      jumping = false;
     }
   }
 
@@ -57,5 +69,15 @@ void Player::startFalling() {
   falling = true;
 }
 
+void Player::jump(){
+  if(falling) {
+    return;
+  }
+  
+  jumping = true;
+  velocity.y = JUMP_SPEED;
+}
+
 bool Player::isFalling() const {return falling;}
+bool Player::isJumping() const {return jumping;}
 bool Player::isInvincible() const {return invincible;}

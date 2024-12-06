@@ -18,6 +18,7 @@ void myInit(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
+	util::setupLights();
 	util::setupMaterials();
 
 	game.start();
@@ -48,6 +49,13 @@ void myKeyboard(unsigned char button, int x, int y)
 void myKeyboardUp(unsigned char button, int x, int y)
 {
 	game.keyhandler.keyUp(button, x, y);
+
+	glutPostRedisplay();
+}
+
+void myMouse(int button, int state, int x, int y)
+{
+	game.keyhandler.mouse(button, state, x, y);
 
 	glutPostRedisplay();
 }
@@ -88,6 +96,8 @@ void main(int argc, char **argv)
 
 	glutKeyboardFunc(myKeyboard);
 	glutKeyboardUpFunc(myKeyboardUp);
+
+	glutMouseFunc(myMouse);
 
 	myInit();
 

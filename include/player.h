@@ -11,6 +11,8 @@ class Player : public GameObject
 {
 public:
   static float PLAYER_Y;
+  static float JUMP_SPEED;
+  static float JUMP_HEIGHT;
 public:
   using GameObject::GameObject;
   
@@ -21,12 +23,15 @@ public:
 
 public:
   int keys = 0;
+  void jump();
   void startFalling();
   bool isFalling() const;
+  bool isJumping() const;
   bool isInvincible() const;
 
 private:
   bool falling = false;
   bool invincible = false;
+  bool jumping = false;
   steady_clock::time_point invincibilityTimer;  
 };
