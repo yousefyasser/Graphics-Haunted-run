@@ -37,10 +37,8 @@ public:
     Player player;
     SpawnableManager spawnableManager;
 
-    Model_3DS enemyModel;
     Model_3DS collectableModel;
 
-    std::vector<std::unique_ptr<Spawnable>> enemies;
     std::vector<std::unique_ptr<Spawnable>> collectables;
     GroundManager groundManager;
     WallManager wallManagerLeft;
