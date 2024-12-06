@@ -39,7 +39,13 @@ void Scene2::update(float dt)
     wallManagerLeft.update(dt);
     wallManagerRight.update(dt);
     camera.update(dt, player.position, player.angle);
+
     spawnableManager.update(dt, enemies, true, enemyModel, groundManager.SPEED);
+
+    if (!player.isFalling() && groundManager.isHole(player.position.x, player.position.z))
+    {
+        player.startFalling();
+    }
 }
 
 void Scene2::render() const
