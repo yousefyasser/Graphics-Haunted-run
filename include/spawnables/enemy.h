@@ -2,11 +2,10 @@
 
 #include "spawnable.h"
 
-class Collectable : public Spawnable {
+class Enemy : public Spawnable {
 public:
   using Spawnable::Spawnable;
 
   void load() override;
-  void update(float dt) override;
   void render() const override;
 };

@@ -21,8 +21,8 @@ GameObject::GameObject(const Vector3f &initialPosition,
 BoundingBox GameObject::calculateBoundingBox()
 {
   return BoundingBox(
-      Vector3f(position.x - 0.05, position.y, position.z - 0.05),
-      Vector3f(position.x + 0.05, position.y + 0.2, position.z + 0.05));
+      Vector3f(position.x - 0.05f, position.y, position.z - 0.05f),
+      Vector3f(position.x + 0.05f, position.y + 0.2f, position.z + 0.05f));
 }
 
 void GameObject::setPosition(const Vector3f &newPosition)

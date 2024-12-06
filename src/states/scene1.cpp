@@ -28,6 +28,7 @@ void Scene1::update(float dt)
     tileManager.update(dt);
     camera.update(dt, player.position, player.angle);
     spawnableManager.update(dt, collectables, tileManager.SPEED);
+    spawnableManager.update(dt, enemies, tileManager.SPEED);
 }
 
 void Scene1::render() const
@@ -37,4 +38,5 @@ void Scene1::render() const
     player.render();
     tileManager.render();
     spawnableManager.render(collectables);
+    spawnableManager.render(enemies);
 }

@@ -5,8 +5,8 @@ void Collectable::load() {
 }
 
 void Collectable::update(float dt) {
+  Spawnable::update(dt);
   angle.y += 90.0f * dt;
-  position += velocity * dt;
 }
 
 void Collectable::render() const {
