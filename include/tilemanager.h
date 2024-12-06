@@ -13,6 +13,7 @@ public:
     virtual void update(float dt);
     virtual void render() const;
     bool getTile(int row, int col) const;
+    float getConstantAxis() const;
 
     const float SPEED;
 

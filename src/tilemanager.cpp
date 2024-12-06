@@ -50,3 +50,8 @@ bool TileManager::getTile(int row, int col) const
 {
 	return tileMap[row][col];
 }
+
+float TileManager::getConstantAxis() const
+{
+	return constantAxis;
+}
