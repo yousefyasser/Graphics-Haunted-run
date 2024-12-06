@@ -105,10 +105,16 @@ void KeyHandler::playerKeyDown(unsigned char key, int x, int y)
     switch (key)
     {
     case 'a':
-        scene1.player.velocity.x = scene1.player.MAX_SPEED;
+        if(scene1.player.position.x < scene1.wallManagerLeft.getConstantAxis() - 5.0f)
+            scene1.player.velocity.x = scene1.player.MAX_SPEED;
+        else
+            scene1.player.velocity.x = 0;
         break;
     case 'd':
-        scene1.player.velocity.x = -scene1.player.MAX_SPEED;
+        if(scene1.player.position.x > scene1.wallManagerRight.getConstantAxis() + 5.0f)
+            scene1.player.velocity.x = -scene1.player.MAX_SPEED;
+        else
+            scene1.player.velocity.x = 0;
         break;
     case ' ':
         scene1.player.jump();
