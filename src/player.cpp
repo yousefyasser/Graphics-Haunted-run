@@ -19,8 +19,7 @@ void Player::update(float dt)
     if (position.y < -15) {
       position.y = PLAYER_Y;
       falling = false;
-      invincible = true;
-      invincibilityTimer = std::chrono::high_resolution_clock::now();
+      startInvincibility();
     }
   }
 
@@ -67,6 +66,11 @@ void Player::load()
 
 void Player::startFalling() {
   falling = true;
+}
+
+void Player::startInvincibility() {
+  invincible = true;
+  invincibilityTimer = std::chrono::high_resolution_clock::now();
 }
 
 void Player::jump(){

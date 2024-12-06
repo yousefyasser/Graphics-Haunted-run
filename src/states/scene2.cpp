@@ -23,6 +23,14 @@ void Scene2::update(float dt)
     {
         player.startFalling();
     }
+
+    int pos = spawnableManager.isColliding(player, enemies);
+    if (pos == -1)
+        return;
+
+    player.keys--;
+    player.startInvincibility();
+    spawnableManager.removeColliding(pos, enemies);
 }
 
 void Scene2::render() const

@@ -26,6 +26,7 @@ void Scene1::update(float dt)
         if (index == -1)
             return;
 
+        player.startInvincibility();
         player.keys++;
         spawnableManager.removeColliding(index, collectables);
     }

@@ -25,6 +25,7 @@ public:
   int keys = 0;
   void jump();
   void startFalling();
+  void startInvincibility();
   bool isFalling() const;
   bool isJumping() const;
   bool isInvincible() const;
