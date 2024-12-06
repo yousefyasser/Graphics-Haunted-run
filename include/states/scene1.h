@@ -11,7 +11,7 @@
 class Scene1 : public BaseState
 {
 public:
-    struct EnterParams: public BaseParams
+    struct EnterParams : public BaseParams
     {
         GLdouble fovy;
         GLdouble aspectRatio;
@@ -25,7 +25,7 @@ public:
 public:
     Scene1();
 
-    void enter(const BaseParams& params) override;
+    void enter(const BaseParams &params) override;
     void exit() override;
     void update(float dt) override;
     void render() const override;
@@ -43,4 +43,7 @@ public:
     GroundManager groundManager;
     WallManager wallManagerLeft;
     WallManager wallManagerRight;
+
+private:
+    float keyCollectTimer = 0.0f; // Timer to track elapsed time since key_collect sound started
 };

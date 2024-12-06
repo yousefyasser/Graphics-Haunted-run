@@ -6,8 +6,10 @@
 #include "include/game.h"
 #include "include/util.h"
 #include "include/states/scene1.h"
+#include "SoundManager.h"
 
 Game game;
+SoundManager soundManager;
 
 //=======================================================================
 // OpengGL Configuration Function
@@ -74,6 +76,15 @@ void main(int argc, char **argv)
 	glutCreateWindow("Hunted Run");
 
 	glutDisplayFunc(myDisplay);
+
+	// Load sounds
+	soundManager.loadSound("background", "sounds/soundtrack.wav");
+	soundManager.loadSound("key_collect", "sounds/key_collect.mp3");
+	soundManager.loadSound("fall", "sounds/fall.mp3");
+
+	// Play background sound
+	soundManager.setVolume("background", 50.0f);
+	soundManager.playSound("background");
 
 	glutKeyboardFunc(myKeyboard);
 	glutKeyboardUpFunc(myKeyboardUp);

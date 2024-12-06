@@ -1,5 +1,8 @@
 #include <iostream>
 #include "include/states/scene1.h"
+#include "SoundManager.h"
+
+extern SoundManager soundManager;
 
 Scene1::Scene1()
     : camera(0.0f, 15.0f, -26.0f, 0.0f, 12.0f, -21.0f, 0.0f, 1.0f, 0.0f),
@@ -52,10 +55,15 @@ void Scene1::update(float dt)
         if (index == -1)
             return;
 
+        soundManager.playSound("key_collect");
         player.keys++;
+
         std::cout << "keys: " << player.keys << std::endl;
         spawnableManager.removeColliding(index, collectables);
     }
+
+    // Update the timer
+    keyCollectTimer += dt;
 }
 
 void Scene1::render() const
