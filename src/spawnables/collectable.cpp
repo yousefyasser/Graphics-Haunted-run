@@ -10,7 +10,7 @@ void Collectable::update(float dt) {
 void Collectable::render() const {
   glPushMatrix();
   glTranslatef(position.x, position.y, position.z);
-  glScalef(1.0f, 0.5f, 0.5f);
+  glScalef(scale[0], scale[1], scale[2]);
   glRotatef(angle.y, 0, 1, 0);
   model.Draw();
   glPopMatrix();

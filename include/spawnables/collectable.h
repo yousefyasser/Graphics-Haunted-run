@@ -9,4 +9,6 @@ public:
   void load() override;
   void update(float dt) override;
   void render() const override;
+
+  float scale[3] = {1.0f, 0.5f, 0.5f};
 };

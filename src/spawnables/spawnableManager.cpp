@@ -3,7 +3,7 @@
 
 SpawnableManager::SpawnableManager(bool enemies, bool collectables) : enemies(enemies), collectables(collectables) {}
 
-void SpawnableManager::update(float dt, std::vector<std::unique_ptr<Spawnable>> &spawnables, bool isEnemy, const Model_3DS &model, float groundSpeed){
+void SpawnableManager::update(float dt, std::vector<std::unique_ptr<Spawnable>> &spawnables, int isEnemy, const Model_3DS &model, float groundSpeed){
     bool spawnableOutOfBound = false;
 
     if(collectables){
@@ -34,11 +34,11 @@ void SpawnableManager::render(const std::vector<std::unique_ptr<Spawnable>> &spa
     }
 }
 
-void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables, bool isEnemy, const Model_3DS &model, float groundSpeed)
+void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables, int isEnemy, const Model_3DS &model, float groundSpeed)
 {
     spawn_position_x = static_cast<float>(rand()) / RAND_MAX * 30 - 15;
 
-    if(collectable_last_spawned_at >= COLLECTABLE_SPAWN_RATE && !isEnemy){
+    if(collectable_last_spawned_at >= COLLECTABLE_SPAWN_RATE && isEnemy == 0){
         Vector3f pos(spawn_position_x, 2, 100), vel(0, 0, -groundSpeed), angle(0, 0, 0);
 
         auto newCollectable = std::make_unique<Collectable>(pos, vel, angle);
@@ -46,7 +46,18 @@ void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &spawnables
         spawnables.push_back(std::move(newCollectable));
 
         collectable_last_spawned_at = 0;
-    }else if(enemy_last_spawned_at >= ENEMY_SPAWN_RATE && isEnemy){
+    }else if(collectable_last_spawned_at >= COLLECTABLE_SPAWN_RATE && isEnemy == 1){
+        Vector3f pos(spawn_position_x, 2, 100), vel(0, 0, -groundSpeed), angle(0, 0, 0);
+
+        auto newCollectable = std::make_unique<Collectable>(pos, vel, angle);
+        newCollectable->setModel(model);
+        newCollectable->scale[0] = 0.1f;
+        newCollectable->scale[1] = 0.05f;
+        newCollectable->scale[2] = 0.05f;
+        spawnables.push_back(std::move(newCollectable));
+
+        collectable_last_spawned_at = 0;
+    }else if(enemy_last_spawned_at >= ENEMY_SPAWN_RATE && isEnemy == 2){
         Vector3f pos(spawn_position_x, 2, 100), vel(0, 0, -groundSpeed), angle(0, 90, 0);
 
         auto newEnemy = std::make_unique<Enemy>(pos, vel, angle);
