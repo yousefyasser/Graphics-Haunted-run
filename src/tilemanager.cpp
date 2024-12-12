@@ -3,7 +3,7 @@
 
 TileManager::TileManager(float tileWidth, float tileHeight, int rows, int cols,
 						 float startMainAxis, float startSecondaryAxis, float constantAxis,
-						 float speed, const char *texturePath)
+						 float speed, char *texturePath)
 	: tileWidth(tileWidth), tileHeight(tileHeight), rows(rows), cols(cols),
 	  startMainAxis(startMainAxis), startSecondaryAxis(startSecondaryAxis), constantAxis(constantAxis),
 	  tileMap(rows, std::vector<bool>(cols, true)),

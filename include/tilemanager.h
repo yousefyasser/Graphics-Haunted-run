@@ -8,7 +8,7 @@ class TileManager
 public:
     TileManager(float tileWidth, float tileHeight, int rows, int cols,
                 float startMainAxis, float startSecondaryAxis, float constantAxis,
-                float speed, const char *texturePath);
+                float speed, char *texturePath);
     virtual void load();
     virtual void update(float dt);
     virtual void render() const;
@@ -35,8 +35,8 @@ protected:
     float startSecondaryAxis;
     float constantAxis;
 
-protected:
+public:
     const float START_MAIN_AXIS;
     const float START_SECONDARY_AXIS;
-    const char *TEXTURE_PATH;
+    char *TEXTURE_PATH;
 };

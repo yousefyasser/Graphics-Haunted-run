@@ -5,8 +5,14 @@ Scene2::Scene2() : Scene(), spawnableManager(true, false) {}
 void Scene2::enter(const BaseParams &params)
 {
     const EnterParams &p = dynamic_cast<const EnterParams &>(params);
-
     Scene::enter(params);
+
+    wallManagerLeft.TEXTURE_PATH = "Textures/wall3.bmp";
+    wallManagerRight.TEXTURE_PATH = "Textures/wall3.bmp";
+    groundManager.TEXTURE_PATH = "Textures/soil.bmp";
+    wallManagerLeft.load();
+    wallManagerRight.load();
+    groundManager.load();
 
     player.keys = 7;
     enemyModel.Load("Models/enemy/enemy.3ds");
