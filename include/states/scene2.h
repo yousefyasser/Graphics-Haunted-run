@@ -22,7 +22,9 @@ public:
 public:
     SpawnableManager spawnableManager;
     Model_3DS enemyModel;
+    Model_3DS keyModel;
     std::vector<std::unique_ptr<Spawnable>> enemies;
+    std::vector<std::unique_ptr<Spawnable>> collectables;
     steady_clock::time_point start;
     std::chrono::seconds elapsed;
 

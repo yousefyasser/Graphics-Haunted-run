@@ -1,6 +1,6 @@
 #include "include/states/scene2.h"
 
-Scene2::Scene2() : Scene(), spawnableManager(true, false) {}
+Scene2::Scene2() : Scene(), spawnableManager(true, true) {}
 
 void Scene2::enter(const BaseParams &params)
 {
@@ -10,6 +10,7 @@ void Scene2::enter(const BaseParams &params)
 
     player.keys = 7;
     enemyModel.Load("Models/enemy/enemy.3ds");
+    keyModel.Load("Models/coin/coin.3ds");
     start = std::chrono::high_resolution_clock::now();
 }
 
@@ -19,7 +20,8 @@ void Scene2::update(float dt)
 {
     Scene::update(dt);
     elapsed = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - start);
-    spawnableManager.update(dt, enemies, true, enemyModel, groundManager.SPEED);
+    spawnableManager.update(dt, enemies, 2, enemyModel, groundManager.SPEED);
+    spawnableManager.update(dt, collectables, 1, keyModel, groundManager.SPEED);
 
     if (!player.isFalling() && player.position.y == Player::PLAYER_Y && groundManager.isHole(player.position.x, player.position.z))
     {
@@ -27,6 +29,13 @@ void Scene2::update(float dt)
         player.startInvincibility();
         player.keys--;
     }
+
+    int index = spawnableManager.isColliding(player, collectables);
+    if (index == -1)
+        return;
+
+    player.keys++;
+    spawnableManager.removeColliding(index, collectables);
 
     int pos = spawnableManager.isColliding(player, enemies);
     if (pos == -1)
@@ -42,6 +51,7 @@ void Scene2::render() const
     Scene::render();
     renderTime();
     spawnableManager.render(enemies);
+    spawnableManager.render(collectables);
 }
 
 void Scene2::renderTime() const
