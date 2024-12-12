@@ -23,11 +23,11 @@ class SpawnableManager {
   public:
     SpawnableManager(bool enemies, bool collectables);
 
-    void update(float dt, std::vector<std::unique_ptr<Spawnable>> &collectables, bool isEnemy, const Model_3DS &model, float groundSpeed);
+    void update(float dt, std::vector<std::unique_ptr<Spawnable>> &collectables, int isEnemy, const Model_3DS &model, float groundSpeed);
     void render(const std::vector<std::unique_ptr<Spawnable>> &spawnables) const;
     int isColliding(Player &player, const std::vector<std::unique_ptr<Spawnable>> &spawnables);
     void removeColliding(int index, std::vector<std::unique_ptr<Spawnable>> &spawnables);
 
   private:
-    void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &collectables, bool isEnemy, const Model_3DS &model, float groundSpeed);
+    void SpawnableManager::spawn(std::vector<std::unique_ptr<Spawnable>> &collectables, int isEnemy, const Model_3DS &model, float groundSpeed);
 };

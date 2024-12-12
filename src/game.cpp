@@ -76,7 +76,7 @@ void Game::render() const
 
 void Game::start()
 {
-  stateMachine.change(StateType::Scene1, Scene1::EnterParams{
+  stateMachine.change(StateType::Scene2, Scene2::EnterParams{
                                              FOVY,
                                              ASPECT_RATIO,
                                              ZNEAR,

@@ -1,6 +1,20 @@
 #include "include/groundmanager.h"
 #include <glut.h>
 
+void GroundManager::update(float dt) {
+	TileManager::update(dt);
+	colors[0] += 0.01;
+	colors[1] += 0.01;
+	colors[2] += 0.01;
+
+	if (colors[0] > 1)
+	{
+		colors[0] = 0;
+		colors[1] = 0;
+		colors[2] = 0;
+	}
+}
+
 void GroundManager::updateMap()
 {
 	toggleUpdateMap = !toggleUpdateMap;
@@ -47,7 +61,7 @@ void GroundManager::renderHole(float z, float x) const
 {
 	glDisable(GL_LIGHTING);
 
-	glColor3f(0.0, 0.0, 0.0);
+	glColor3f(0, colors[1], colors[2]);
 
 	glPushMatrix();
 	glTranslatef(0, constantAxis, 0);
