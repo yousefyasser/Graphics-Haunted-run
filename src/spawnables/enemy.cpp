@@ -3,7 +3,7 @@
 
 void Enemy::update(float dt) {
   Spawnable::update(dt);
-  scale += 0.1;
+  scale += 0.1f;
 
   if (scale > 6.5f) {
     scale = 5.0f;
