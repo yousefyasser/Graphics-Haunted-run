@@ -41,11 +41,13 @@ void Scene2::update(float dt)
     }
 
     int index = spawnableManager.isColliding(player, collectables);
-    if (index == -1)
-        return;
+    if (index != -1)
+    {
 
-    player.keys++;
-    spawnableManager.removeColliding(index, collectables);
+        soundManager.playSound("key_collect");
+        player.keys++;
+        spawnableManager.removeColliding(index, collectables);
+    }
 
     int pos = spawnableManager.isColliding(player, enemies);
     if (pos == -1)
